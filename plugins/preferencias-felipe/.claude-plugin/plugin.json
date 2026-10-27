@@ -1,0 +1,9 @@
+{
+  "name": "preferencias-felipe",
+  "version": "0.1.0",
+  "description": "No início de cada sessão, lembra o Claude de recomendar o processo ECC e as skills de design, perguntando antes de usá-las.",
+  "author": {
+    "name": "Felipe Yabiko"
+  },
+  "license": "MIT"
+}

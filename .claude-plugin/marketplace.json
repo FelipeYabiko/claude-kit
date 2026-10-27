@@ -1,0 +1,48 @@
+{
+  "name": "claude-kit",
+  "owner": {
+    "name": "Felipe Yabiko"
+  },
+  "metadata": {
+    "description": "Kit pessoal do Felipe: processo ECC essencial, skills de design do rtadewald e preferências de início de projeto."
+  },
+  "plugins": [
+    {
+      "name": "preferencias-felipe",
+      "source": "./plugins/preferencias-felipe",
+      "description": "No início de cada sessão, lembra o Claude de recomendar o processo ECC e as skills de design, perguntando antes de usá-las."
+    },
+    {
+      "name": "ecc",
+      "source": "./plugins/ecc",
+      "description": "ECC essencial: agentes planner, tdd-guide, code-reviewer, python-reviewer e security-reviewer, e as regras common, python, typescript e web (affaan-m/ECC, MIT)."
+    },
+    {
+      "name": "rtadewald-design",
+      "source": {
+        "source": "github",
+        "repo": "rtadewald/skills"
+      },
+      "strict": false,
+      "version": "0.1.0",
+      "description": "Skills de design e criatividade do rtadewald/skills: planejar telas, wireframes, mock em imagem, imagem para HTML, animações, design system e vídeo para HTML.",
+      "homepage": "https://github.com/rtadewald/skills",
+      "skills": [
+        "./plan-screen",
+        "./to-wireframe",
+        "./img-to-html",
+        "./animate",
+        "./extract-ds",
+        "./video2html",
+        "./nano-banana-pro",
+        "./to-img",
+        "./openrouter-img",
+        "./fal-ai",
+        "./mediabunny",
+        "./grill-me",
+        "./to-tickets",
+        "./handoff"
+      ]
+    }
+  ]
+}

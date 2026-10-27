@@ -1,0 +1,12 @@
+{
+  "name": "ecc",
+  "version": "2.2.3-essencial.1",
+  "description": "ECC essencial: os agentes planner, tdd-guide, code-reviewer, python-reviewer e security-reviewer, mais a skill processo-ecc com as regras common, python, typescript e web.",
+  "author": {
+    "name": "Affaan Mustafa (ECC); recorte de Felipe Yabiko"
+  },
+  "homepage": "https://github.com/affaan-m/ECC",
+  "repository": "https://github.com/affaan-m/ECC",
+  "license": "MIT",
+  "keywords": ["ecc", "tdd", "code-review", "security", "planning"]
+}
