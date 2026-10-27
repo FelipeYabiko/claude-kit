@@ -19,14 +19,26 @@ Meu marketplace de plugins do Claude Code. Instalado uma vez, vale em todas as s
 /plugin install rtadewald-design@claude-kit
 ```
 
-**Automático por projeto:** o `.claude/settings.json` deste repositório já registra o marketplace e
-ativa os três plugins. Para ter o mesmo em outro projeto, copie o arquivo para o `.claude/` dele. No
-computador, para valer em todos os projetos, junte o mesmo conteúdo ao `~/.claude/settings.json`.
-O Claude Code pede para confiar na pasta e instalar os plugins na primeira vez.
+**Automático no computador:** o `.claude/settings.json` deste repositório registra o marketplace e
+ativa os três plugins quando você abre o projeto no Claude Code do computador (terminal, app ou IDE).
+O Claude Code pede para confiar na pasta e instalar os plugins na primeira vez. Para ter o mesmo em
+outro projeto, copie o arquivo para o `.claude/` dele; para valer em todos os projetos do computador,
+junte o mesmo conteúdo ao `~/.claude/settings.json`.
 
-**Sessões na nuvem (claude.ai/code e app):** os plugins ativados na conta do claude.ai entram sozinhos
-em toda sessão nova, em qualquer repositório. Adicione este repositório como marketplace nas
-configurações de plugins do claude.ai e ative os três.
+> Esse arquivo **não vale nas sessões na nuvem**: elas não instalam os plugins que o
+> `.claude/settings.json` de um repositório ativa.
+
+**Sessões na nuvem (claude.ai/code e app) e chat do claude.ai:** instale pela conta do claude.ai. Os
+plugins da conta entram sozinhos em toda sessão nova, em qualquer repositório.
+
+1. Abra [Customize → Plugins](https://claude.ai/customize/plugins).
+2. Clique em **Add → Add marketplace** (não use a busca do **Discover**: ela só mostra o diretório
+   oficial e os marketplaces já adicionados).
+3. Digite `FelipeYabiko/claude-kit` e confirme.
+4. Abra `preferencias-felipe`, `ecc` e `rtadewald-design` e clique em **Add** em cada um.
+5. Opcional: ligue **Sync automatically** no marketplace para receber as mudanças deste repositório.
+
+No chat do claude.ai entram só as skills; ganchos e agentes funcionam no Claude Code e no Cowork.
 
 ## Como as skills são escolhidas
 
