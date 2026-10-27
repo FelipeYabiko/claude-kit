@@ -44,7 +44,12 @@ No chat do claude.ai entram só as skills; ganchos e agentes funcionam no Claude
 
 O Claude já vê a descrição de cada skill instalada e ativa a que combina com o pedido. O
 `preferencias-felipe` reforça isso: a cada mensagem, um gancho lembra de conferir se alguma skill ou
-agente se aplica, e a skill `escolher-skills` tem o mapa para quando mais de uma serve. Para mudar o
+agente se aplica, e a skill `escolher-skills` tem o mapa para quando mais de uma serve.
+
+Atenção: 11 das 14 skills do `rtadewald-design` vêm marcadas pelo autor para rodar só pelo comando
+(`plan-screen`, `to-wireframe`, `img-to-html`, `animate`, `video2html`, `to-img`, `openrouter-img`,
+`fal-ai`, `grill-me`, `to-tickets`, `handoff`). O Claude não consegue chamá-las sozinho; ele sugere o
+comando, por exemplo `/rtadewald-design:plan-screen`, e você digita. Para mudar o
 que é usado direto e o que pede confirmação, edite
 `plugins/preferencias-felipe/skills/escolher-skills/SKILL.md` e `plugins/preferencias-felipe/hooks/lembrete.md`.
 
