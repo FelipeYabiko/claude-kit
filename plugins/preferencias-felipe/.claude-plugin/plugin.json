@@ -1,7 +1,7 @@
 {
   "name": "preferencias-felipe",
-  "version": "0.1.0",
-  "description": "No início de cada sessão, lembra o Claude de recomendar o processo ECC e as skills de design, perguntando antes de usá-las.",
+  "version": "0.2.0",
+  "description": "Lembra o Claude, no início da sessão e a cada mensagem, de usar as skills e agentes instalados quando se aplicam (com um mapa de qual usar), perguntando antes só do processo ECC completo e do pipeline de design.",
   "author": {
     "name": "Felipe Yabiko"
   },

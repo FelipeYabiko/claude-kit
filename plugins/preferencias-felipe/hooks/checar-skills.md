@@ -1,0 +1,1 @@
+(preferencias-felipe) Antes de agir, veja se alguma skill ou agente instalado se aplica a este pedido e use. Em dúvida sobre qual, carregue a skill `preferencias-felipe:escolher-skills`. Pedido rápido ou conversa: responda direto.
