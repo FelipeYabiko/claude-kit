@@ -4,7 +4,7 @@ Meu marketplace de plugins do Claude Code. Instalado uma vez, vale em todas as s
 
 | Plugin | O que traz | Custo fixo por sessão |
 |---|---|---|
-| `preferencias-felipe` | Gancho de início de sessão: responder em português; recomendar o ECC e as skills de design no começo de um projeto e perguntar antes de usar. | ~0 tokens |
+| `preferencias-felipe` | Ganchos de início de sessão e de cada mensagem: responder em português e usar as skills e agentes instalados quando se aplicam, perguntando antes só do processo ECC completo e do pipeline de design. Traz a skill `escolher-skills`, um mapa de qual skill ou agente usar em cada caso. | ~200 tokens + ~60 por mensagem |
 | `ecc` | ECC essencial: agentes `planner`, `tdd-guide`, `code-reviewer`, `python-reviewer` e `security-reviewer`, mais a skill `processo-ecc` com as regras `common`, `python`, `typescript` e `web`. | ~500 tokens |
 | `rtadewald-design` | 14 skills de [rtadewald/skills](https://github.com/rtadewald/skills), lidas direto de lá: `plan-screen`, `to-wireframe`, `img-to-html`, `animate`, `extract-ds`, `video2html`, `nano-banana-pro`, `to-img`, `openrouter-img`, `fal-ai`, `mediabunny`, `grill-me`, `to-tickets`, `handoff`. | ~1.600 tokens |
 
@@ -19,9 +19,22 @@ Meu marketplace de plugins do Claude Code. Instalado uma vez, vale em todas as s
 /plugin install rtadewald-design@claude-kit
 ```
 
+**Automático por projeto:** o `.claude/settings.json` deste repositório já registra o marketplace e
+ativa os três plugins. Para ter o mesmo em outro projeto, copie o arquivo para o `.claude/` dele. No
+computador, para valer em todos os projetos, junte o mesmo conteúdo ao `~/.claude/settings.json`.
+O Claude Code pede para confiar na pasta e instalar os plugins na primeira vez.
+
 **Sessões na nuvem (claude.ai/code e app):** os plugins ativados na conta do claude.ai entram sozinhos
-em toda sessão nova. Adicione este repositório como marketplace nas configurações de plugins do
-claude.ai e ative os três.
+em toda sessão nova, em qualquer repositório. Adicione este repositório como marketplace nas
+configurações de plugins do claude.ai e ative os três.
+
+## Como as skills são escolhidas
+
+O Claude já vê a descrição de cada skill instalada e ativa a que combina com o pedido. O
+`preferencias-felipe` reforça isso: a cada mensagem, um gancho lembra de conferir se alguma skill ou
+agente se aplica, e a skill `escolher-skills` tem o mapa para quando mais de uma serve. Para mudar o
+que é usado direto e o que pede confirmação, edite
+`plugins/preferencias-felipe/skills/escolher-skills/SKILL.md` e `plugins/preferencias-felipe/hooks/lembrete.md`.
 
 ## Chaves de API
 

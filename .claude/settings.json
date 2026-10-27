@@ -1,0 +1,16 @@
+{
+  "extraKnownMarketplaces": {
+    "claude-kit": {
+      "source": {
+        "source": "github",
+        "repo": "FelipeYabiko/claude-kit"
+      },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {
+    "preferencias-felipe@claude-kit": true,
+    "ecc@claude-kit": true,
+    "rtadewald-design@claude-kit": true
+  }
+}
