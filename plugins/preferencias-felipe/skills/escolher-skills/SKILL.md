@@ -16,8 +16,12 @@ servir à primeira vista.
    que está usando.
 3. Pergunte antes só nos casos marcados com **(perguntar)**: são processos longos ou que gastam
    créditos de API. Se o usuário já disse sim neste projeto, não pergunte de novo.
-4. Se o item não estiver instalado nesta sessão, siga sem ele e avise em uma linha qual faltou.
-5. Pergunta rápida, conta, texto curto: não use nada disto, responda direto.
+4. Itens marcados com **(comando)** só rodam quando o usuário digita o comando: o autor bloqueou a
+   chamada pelo Claude. Não tente carregar a skill. Diga em uma linha qual comando serve e por quê,
+   por exemplo: "Para planejar essa tela, digite `/rtadewald-design:plan-screen`". Se o usuário não
+   quiser, siga sem ela.
+5. Se o item não estiver instalado nesta sessão, siga sem ele e avise em uma linha qual faltou.
+6. Pergunta rápida, conta, texto curto: não use nada disto, responda direto.
 
 ## Mapa
 
@@ -32,26 +36,29 @@ servir à primeira vista.
 | Código com entrada do usuário, auth, SQL, arquivos, rede, segredos | agente `ecc:security-reviewer` |
 | Recebeu review de outra pessoa ou bot | skill `receiving-code-review` |
 | Antes de dizer que terminou, commitar ou abrir PR | skill `verification-before-completion` |
-| Afiar um plano ou design com perguntas | skill `grill-me` |
-| Quebrar um plano em tickets | skill `to-tickets` |
-| Passar o trabalho para outra sessão ou agente | skill `handoff` |
+| Afiar um plano ou design com perguntas **(comando)** | `/rtadewald-design:grill-me` |
+| Quebrar um plano em tickets **(comando)** | `/rtadewald-design:to-tickets` |
+| Passar o trabalho para outra sessão ou agente **(comando)** | `/rtadewald-design:handoff` |
 
 ### Telas, imagens e animação
 
 | Situação | Use |
 |---|---|
-| Planejar tela ou fluxo de app **(perguntar)** | `plan-screen` |
-| Wireframe a partir de imagem ou brief | `to-wireframe` |
-| Gerar ou editar imagem (mock, variação) **(perguntar: usa API paga)** | `nano-banana-pro` (Gemini), `to-img` ou `openrouter-img` (OpenRouter) |
-| Transformar mock em imagem em HTML **(perguntar)** | `img-to-html` |
-| Animações para site | `animate` |
-| Montar design system de um site pronto **(perguntar)** | `extract-ds` |
-| HTML animado a partir de imagem + vídeo **(perguntar: usa API paga)** | `video2html` |
-| OCR ou caixas de texto numa imagem | `fal-ai` |
-| Manipular áudio ou vídeo no navegador | `mediabunny` |
+| Planejar tela ou fluxo de app **(comando)** | `/rtadewald-design:plan-screen` |
+| Wireframe a partir de imagem ou brief **(comando)** | `/rtadewald-design:to-wireframe` |
+| Gerar ou editar imagem com Gemini **(perguntar: usa API paga)** | skill `rtadewald-design:nano-banana-pro` |
+| Gerar imagem pelo OpenRouter **(comando; usa API paga)** | `/rtadewald-design:to-img` ou `/rtadewald-design:openrouter-img` |
+| Transformar mock em imagem em HTML **(comando)** | `/rtadewald-design:img-to-html` |
+| Animações para site **(comando)** | `/rtadewald-design:animate` |
+| Montar design system de um site pronto **(perguntar)** | skill `rtadewald-design:extract-ds` |
+| HTML animado a partir de imagem + vídeo **(comando; usa API paga)** | `/rtadewald-design:video2html` |
+| OCR ou caixas de texto numa imagem **(comando; usa API paga)** | `/rtadewald-design:fal-ai` |
+| Manipular áudio ou vídeo no navegador | skill `rtadewald-design:mediabunny` |
 | Criticar design, acessibilidade, textos de interface | `design:design-critique`, `design:accessibility-review`, `design:ux-copy` (se instalados) |
 
-Fluxo típico de tela: `plan-screen` → `to-wireframe` → mock em imagem → `img-to-html` → `animate`.
+Fluxo típico de tela: `/rtadewald-design:plan-screen` → `/rtadewald-design:to-wireframe` → mock em
+imagem (`nano-banana-pro`) → `/rtadewald-design:img-to-html` → `/rtadewald-design:animate`. Como a
+maioria dos passos é **(comando)**, sugira o próximo comando ao fim de cada etapa.
 
 ### Documentos e dados
 
