@@ -4,7 +4,7 @@ Meu marketplace de plugins do Claude Code. Instalado uma vez, vale em todas as s
 
 | Plugin | O que traz | Custo fixo por sessão |
 |---|---|---|
-| `preferencias-felipe` | Ganchos de início de sessão e de cada mensagem: responder em português e usar as skills e agentes instalados quando se aplicam, perguntando antes só do processo ECC completo e do pipeline de design. Traz a skill `escolher-skills`, um mapa de qual skill ou agente usar em cada caso. | ~200 tokens + ~60 por mensagem |
+| `preferencias-felipe` | Ganchos de início de sessão e de cada mensagem: responder em português e, em projeto, avaliar quais skills e agentes servem, perguntar quais você quer usar e usar só os aprovados. Traz a skill `escolher-skills`, um mapa de qual skill ou agente usar em cada caso. | ~200 tokens + ~60 por mensagem |
 | `ecc` | ECC essencial: agentes `planner`, `tdd-guide`, `code-reviewer`, `python-reviewer` e `security-reviewer`, mais a skill `processo-ecc` com as regras `common`, `python`, `typescript` e `web`. | ~500 tokens |
 | `rtadewald-design` | 14 skills de [rtadewald/skills](https://github.com/rtadewald/skills), lidas direto de lá: `plan-screen`, `to-wireframe`, `img-to-html`, `animate`, `extract-ds`, `video2html`, `nano-banana-pro`, `to-img`, `openrouter-img`, `fal-ai`, `mediabunny`, `grill-me`, `to-tickets`, `handoff`. | ~1.600 tokens |
 
@@ -44,8 +44,8 @@ No chat do claude.ai entram só as skills; ganchos e agentes funcionam no Claude
 
 Não precisa fazer nada especial: peça o que quer, do jeito normal, e o Claude escolhe a ferramenta.
 O Claude já vê a descrição de cada skill instalada e ativa a que combina com o pedido; o
-`preferencias-felipe` reforça isso com um gancho que, a cada mensagem, lembra de conferir se alguma
-skill ou agente se aplica, e a skill `escolher-skills` tem o mapa para quando mais de uma serve.
+`preferencias-felipe` reforça isso com um gancho que, a cada mensagem, lembra de avaliar quais skills
+e agentes servem e de perguntar quais você quer usar, e a skill `escolher-skills` tem o mapa para quando mais de uma serve.
 
 ### Quem ativa cada coisa
 
@@ -61,17 +61,19 @@ chamada pelo Claude.
 
 ### Quando o Claude pergunta antes
 
-Só no que é longo ou custa dinheiro: o processo ECC completo no começo de um projeto, `extract-ds` e
-geração de imagem com `nano-banana-pro`. Depois de um sim no projeto, ele não pergunta de novo.
+Em todo trabalho de projeto: o Claude avalia quais skills e agentes do kit servem, lista cada um com
+uma linha dizendo para que serve e usa só os que você aprovar. Depois de um sim no projeto, ele não
+pergunta do mesmo de novo. Pedido rápido, pergunta ou conta não gera pergunta nenhuma, e as skills e
+agentes que o próprio projeto define em `.claude/` ou no `CLAUDE.md` seguem as regras daquele projeto.
 
 ### Exemplos
 
 | Você pede | O que acontece |
 |---|---|
-| "Cria um app de tarefas em Python" | Pergunta se quer o ECC; com sim: plano → seu OK → testes primeiro → código → revisores → commit |
-| "Arruma esse bug" | Teste que reproduz o bug (`tdd-guide`), correção, revisão |
+| "Cria um app de tarefas em Python" | Pergunta quais usar (ECC, planner, tdd-guide, revisores...); com sim: plano → seu OK → testes primeiro → código → revisores → commit |
+| "Arruma esse bug" | Pergunta se quer `tdd-guide` e revisor; com sim: teste que reproduz o bug, correção, revisão |
 | "Quero uma landing page" | Sugere `/rtadewald-design:plan-screen` e, a cada etapa, o próximo comando |
-| "Transforma esse relatório em PDF" | Usa `pdf` direto |
+| "Transforma esse relatório em PDF" | Pergunta se pode usar `pdf` e segue com o que você aprovar |
 | Pergunta rápida | Responde direto, sem ferramenta |
 
 ### Atalhos
@@ -92,7 +94,7 @@ Skills de imagem e vídeo precisam das [chaves de API](#chaves-de-api).
 ### Mudar o comportamento
 
 - Qual skill usar em cada caso: `plugins/preferencias-felipe/skills/escolher-skills/SKILL.md`.
-- Quando perguntar antes e regras gerais: `plugins/preferencias-felipe/hooks/lembrete.md`.
+- Regras gerais e a pergunta de quais skills usar: `plugins/preferencias-felipe/hooks/lembrete.md`.
 - Depois, veja [Atualizar](#atualizar). Ou peça ao Claude numa sessão deste repositório para editar e
   fazer o merge.
 

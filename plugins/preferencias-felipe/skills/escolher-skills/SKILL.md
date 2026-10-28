@@ -1,27 +1,30 @@
 ---
 name: escolher-skills
-description: Mapa de qual skill ou agente usar para cada tipo de pedido do Felipe (código, revisão, testes, segurança, planos, telas, imagens, animação, documentos, planilhas, PDF, pesquisa). Use quando não estiver claro qual skill ou agente instalado se aplica, quando o pedido combina várias etapas, ou quando o usuário perguntar quais skills usar.
+description: Mapa de qual skill ou agente usar para cada tipo de pedido do Felipe (código, revisão, testes, segurança, planos, telas, imagens, animação, documentos, planilhas, PDF, pesquisa), para perguntar quais ele quer usar. Use quando não estiver claro qual skill ou agente instalado se aplica, quando o pedido combina várias etapas, ou quando o usuário perguntar quais skills usar.
 ---
 
 # Escolher skills
 
-As skills instaladas já aparecem para o Claude com a descrição de cada uma, e ele as ativa sozinho
-quando o pedido combina. Este mapa serve para os casos em que mais de uma serve, ou nenhuma parece
-servir à primeira vista.
+As skills instaladas já aparecem para o Claude com a descrição de cada uma. Este mapa serve para
+achar quais combinam com o pedido, principalmente quando mais de uma serve, ou nenhuma parece servir
+à primeira vista. Em projeto, o Claude pergunta quais usar antes de começar.
 
 ## Como decidir
 
 1. Leia o pedido e ache a linha da tabela que combina. Pode ser mais de uma: siga a ordem do fluxo.
-2. Se a skill ou o agente estiver instalado, use direto. Não precisa anunciar, só diga em uma linha o
-   que está usando.
-3. Pergunte antes só nos casos marcados com **(perguntar)**: são processos longos ou que gastam
-   créditos de API. Se o usuário já disse sim neste projeto, não pergunte de novo.
+2. Liste as skills e os agentes instalados que servem e pergunte ao usuário quais quer usar, com uma
+   linha dizendo para que serve cada um. Use só os aprovados. Se o usuário já aprovou um deles neste
+   projeto, não pergunte dele de novo.
+3. Os itens marcados com **(API paga)** gastam créditos: deixe isso claro na linha da pergunta.
 4. Itens marcados com **(comando)** só rodam quando o usuário digita o comando: o autor bloqueou a
    chamada pelo Claude. Não tente carregar a skill. Diga em uma linha qual comando serve e por quê,
    por exemplo: "Para planejar essa tela, digite `/rtadewald-design:plan-screen`". Se o usuário não
    quiser, siga sem ela.
 5. Se o item não estiver instalado nesta sessão, siga sem ele e avise em uma linha qual faltou.
-6. Pergunta rápida, conta, texto curto: não use nada disto, responda direto.
+6. Pedido rápido, uma pergunta ou uma conta, que não é trabalho de projeto: não use nada disto e não
+   pergunte nada, responda direto.
+7. As skills e agentes que o próprio projeto define em `.claude/` ou no `CLAUDE.md` seguem as regras
+   daquele projeto, não esta pergunta.
 
 ## Mapa
 
@@ -29,7 +32,7 @@ servir à primeira vista.
 
 | Situação | Use |
 |---|---|
-| Começar projeto ou mudança grande de código **(perguntar)** | skill `ecc:processo-ecc` |
+| Começar projeto ou mudança grande de código | skill `ecc:processo-ecc` |
 | Planejar feature, refatoração ou arquitetura | agente `ecc:planner` (ou skill `writing-plans`) |
 | Escrever feature, corrigir bug | agente `ecc:tdd-guide` (teste antes do código) |
 | Depois de escrever código | agente `ecc:code-reviewer`; em Python também `ecc:python-reviewer` |
@@ -46,11 +49,11 @@ servir à primeira vista.
 |---|---|
 | Planejar tela ou fluxo de app **(comando)** | `/rtadewald-design:plan-screen` |
 | Wireframe a partir de imagem ou brief **(comando)** | `/rtadewald-design:to-wireframe` |
-| Gerar ou editar imagem com Gemini **(perguntar: usa API paga)** | skill `rtadewald-design:nano-banana-pro` |
+| Gerar ou editar imagem com Gemini **(API paga)** | skill `rtadewald-design:nano-banana-pro` |
 | Gerar imagem pelo OpenRouter **(comando; usa API paga)** | `/rtadewald-design:to-img` ou `/rtadewald-design:openrouter-img` |
 | Transformar mock em imagem em HTML **(comando)** | `/rtadewald-design:img-to-html` |
 | Animações para site **(comando)** | `/rtadewald-design:animate` |
-| Montar design system de um site pronto **(perguntar)** | skill `rtadewald-design:extract-ds` |
+| Montar design system de um site pronto | skill `rtadewald-design:extract-ds` |
 | HTML animado a partir de imagem + vídeo **(comando; usa API paga)** | `/rtadewald-design:video2html` |
 | OCR ou caixas de texto numa imagem **(comando; usa API paga)** | `/rtadewald-design:fal-ai` |
 | Manipular áudio ou vídeo no navegador | skill `rtadewald-design:mediabunny` |
