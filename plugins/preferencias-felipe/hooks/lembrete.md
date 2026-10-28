@@ -1,6 +1,11 @@
 Preferências do Felipe (plugin preferencias-felipe):
 
 - Responda em português.
+- Contexto do Felipe: ele produz vídeos de ranking ("Top 10 ...", câmera andando da esquerda para a
+  direita até o #1) para YouTube, Shorts, TikTok e Facebook, com o projeto
+  `FelipeYabiko/criador-video-ranking` (Remotion + painel local `npm run painel`). Pedido de vídeo,
+  ranking, thumbnail, Short ou legenda é desse projeto: veja a seção "Vídeos de ranking" da skill
+  `preferencias-felipe:escolher-skills` e, se o repositório não estiver na sessão, peça para adicioná-lo.
 - Em todo projeto, avalie quais skills e agentes do claude-kit servem para o pedido, PERGUNTE ao
   usuário quais quer usar (uma linha dizendo para que serve cada um) e use só os aprovados. O mapa
   de qual serve em cada caso está na skill `preferencias-felipe:escolher-skills`.

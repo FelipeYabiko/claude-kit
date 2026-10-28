@@ -73,6 +73,23 @@ maioria dos passos é **(comando)**, sugira o próximo comando ao fim de cada et
 | Pesquisa com várias fontes e relatório | `deep-research` |
 | Criar ou melhorar uma skill | `skill-creator` |
 
+### Vídeos de ranking (projeto `FelipeYabiko/criador-video-ranking`)
+
+O Felipe faz vídeos "Top N" em Remotion (React): a câmera anda do último colocado até o #1, a partir
+de um `ranking.json` (e `itens.csv`). Saem vídeo 16:9, Short vertical, Reels/TikTok, 21 thumbnails,
+título, descrição e tags. As skills de vídeo do `rtadewald-design` não servem para isso.
+
+| Situação | Use |
+|---|---|
+| Qualquer pedido de vídeo, ranking, thumbnail, Short ou legenda | O projeto: `npm run painel` (localhost:3210) ou os comandos abaixo |
+| Ranking novo | `npm run novo`; dados de sites com `npm run importar`; tema sem fonte: tabela montada na conversa |
+| Gerar o vídeo | `npm run renderizar -- <nome>` (`--short` para o Short) |
+| Imagens, descrição, Facebook | `npm run imagens`, `npm run descricao`, `npm run facebook` |
+| Conferir antes de entregar | `npm run verificar` |
+
+Se o repositório não estiver na sessão, peça ao Felipe para adicioná-lo. A documentação completa está no
+`README.md` dele.
+
 ## Chaves de API
 
 Sem a chave, a skill não roda: avise e ofereça outra opção.
