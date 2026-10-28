@@ -73,22 +73,32 @@ maioria dos passos é **(comando)**, sugira o próximo comando ao fim de cada et
 | Pesquisa com várias fontes e relatório | `deep-research` |
 | Criar ou melhorar uma skill | `skill-creator` |
 
-### Vídeos de ranking (projeto `FelipeYabiko/criador-video-ranking`)
+### Vídeos do Felipe (projeto `FelipeYabiko/criador-video-ranking`)
 
-O Felipe faz vídeos "Top N" em Remotion (React): a câmera anda do último colocado até o #1, a partir
-de um `ranking.json` (e `itens.csv`). Saem vídeo 16:9, Short vertical, Reels/TikTok, 21 thumbnails,
-título, descrição e tags. As skills de vídeo do `rtadewald-design` não servem para isso.
+Projeto Remotion (React) + Node que gera vídeo para YouTube, Shorts, TikTok, Reels e Facebook. Três
+tipos: **ensaios visuais sob medida** (o mais usado), rankings "Top N" e narrados automáticos. As
+skills de vídeo do `rtadewald-design` não servem para isso. O projeto tem skills, agentes e regras
+próprios (`.claude/`, `CLAUDE.md`, guias em `canais/`): eles mandam, e o repositório é a fonte
+completa. A sessão precisa tê-lo selecionado ao ser criada.
+
+| Canal | Assunto | Idioma | Visual |
+|---|---|---|---|
+| Lost Signal (YouTube) | o que a cultura e a internet deixaram para trás | en e pt | neon magenta/ciano, TV de tubo |
+| The Collapse Files (YouTube) | golpes e empresas que desmoronam | en | dossiê: pasta manila, carimbo vermelho |
+| Blueprint (YouTube) | como a humanidade construiu o impossível | en | planta de engenharia azul e âmbar |
+| Vitrola (Facebook, público brasileiro) | histórias por trás de músicas de rock | pt | toca-discos anos 70 |
 
 | Situação | Use |
 |---|---|
-| Qualquer pedido de vídeo, ranking, thumbnail, Short ou legenda | O projeto: `npm run painel` (localhost:3210) ou os comandos abaixo |
-| Ranking novo | `npm run novo`; dados de sites com `npm run importar`; tema sem fonte: tabela montada na conversa |
-| Gerar o vídeo | `npm run renderizar -- <nome>` (`--short` para o Short) |
-| Imagens, descrição, Facebook | `npm run imagens`, `npm run descricao`, `npm run facebook` |
-| Conferir antes de entregar | `npm run verificar` |
+| Vídeo novo de um canal | `/video <canal>: <tema>` do projeto (pesquisador, roteirista, aprovação do texto, curador de imagens e diretor de cenas, revisor de quadros, aprovação da folha de quadros, render, textos do YouTube) |
+| Ranking "Top N" | `npm run painel`, `npm run importar`, `npm run renderizar -- <nome>` |
+| Vídeo, Short, thumbnail e marca (PC do Felipe) | `npm run ensaio <nome>`, `npm run short <nome>` (sem `--` no PowerShell), `npm run marca -- <canal>` |
 
-Se o repositório não estiver na sessão, peça ao Felipe para adicioná-lo. A documentação completa está no
-`README.md` dele.
+Regras fixas: um vídeo por conversa; cada vídeo cria 3 cenas novas e usa estrutura de roteiro
+diferente da do episódio anterior; 4:30 a 6 min; sem música, clipe, filme ou imagem com direitos
+(fotos só com licença livre e crédito); efeitos a 60%; fatos com fonte; não abrir PR sem pedido
+(enviar para o branch da sessão e para a `main`). Na nuvem a voz da Microsoft não funciona: a
+narração real e o render final são no computador do Felipe, e ninguém ouve o som na nuvem.
 
 ## Chaves de API
 

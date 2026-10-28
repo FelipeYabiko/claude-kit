@@ -1,6 +1,6 @@
 {
   "name": "preferencias-felipe",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Lembra o Claude, no início da sessão e a cada mensagem, de avaliar quais skills e agentes do claude-kit servem para o pedido, perguntar quais você quer usar e usar só os aprovados (com um mapa de qual serve em cada caso).",
   "author": {
     "name": "Felipe Yabiko"
