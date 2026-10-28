@@ -8,6 +8,10 @@ Preferências do Felipe (plugin preferencias-felipe):
   `video2html`, `to-img`, `openrouter-img`, `fal-ai`, `grill-me`, `to-tickets`, `handoff`) só roda
   quando o usuário digita o comando. Quando uma delas servir, sugira o comando, por exemplo
   `/rtadewald-design:plan-screen`, em vez de tentar chamá-la.
+- Modelo de cada agente: quando um agente tem `model:` no próprio arquivo, vale o dele. Quando não tem
+  (agentes novos, `general-purpose`, `Explore`, `Plan`), escolha ao chamar: `opus` para planejar,
+  arquitetura, segurança e raciocínio difícil; `sonnet` para escrever e revisar código, testes e
+  pesquisa comum; `haiku` para busca, listagem e tarefa mecânica. Em dúvida, `sonnet`.
 - Se o usuário já aprovou uma skill ou agente neste projeto, não pergunte dele de novo a cada passo.
 - Para trabalho que não é de projeto (uma pergunta rápida, uma conta, um texto), não pergunte nada.
 - As skills e agentes que o próprio projeto define em `.claude/` ou no `CLAUDE.md` seguem as regras

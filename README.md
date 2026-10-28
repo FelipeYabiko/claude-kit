@@ -95,6 +95,9 @@ Skills de imagem e vídeo precisam das [chaves de API](#chaves-de-api).
 
 - Qual skill usar em cada caso: `plugins/preferencias-felipe/skills/escolher-skills/SKILL.md`.
 - Regras gerais e a pergunta de quais skills usar: `plugins/preferencias-felipe/hooks/lembrete.md`.
+- Modelo de cada agente: linha `model:` no começo de `plugins/ecc/agents/<nome>.md` (`opus`, `sonnet`,
+  `haiku` ou `inherit`). Hoje `planner` e `security-reviewer` usam `opus`; os outros, `sonnet`. Agente
+  sem `model:` recebe o modelo pela regra do `lembrete.md`.
 - Depois, veja [Atualizar](#atualizar). Ou peça ao Claude numa sessão deste repositório para editar e
   fazer o merge.
 
