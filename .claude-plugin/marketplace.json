@@ -4,13 +4,18 @@
     "name": "Felipe Yabiko"
   },
   "metadata": {
-    "description": "Kit pessoal do Felipe: processo ECC essencial, skills de design do rtadewald e preferências de início de projeto."
+    "description": "Kit pessoal do Felipe: processo ECC essencial, skills de design do rtadewald, preferências de início de projeto e aprendizado (assistir vídeos e guardar o que ensinam como skills)."
   },
   "plugins": [
     {
       "name": "preferencias-felipe",
       "source": "./plugins/preferencias-felipe",
       "description": "Lembra o Claude, no início da sessão e a cada mensagem, de avaliar quais skills e agentes do claude-kit servem para o pedido, perguntar quais você quer usar e usar só os aprovados (com um mapa de qual serve em cada caso)."
+    },
+    {
+      "name": "aprendizado",
+      "source": "./plugins/aprendizado",
+      "description": "Aprender e crescer: assistir vídeos e guardar as lições como skills, guardar como skill o que você ensinar na conversa e recomendar skills novas. As skills aprendidas moram aqui e valem em toda sessão."
     },
     {
       "name": "ecc",
@@ -43,6 +48,16 @@
         "./to-tickets",
         "./handoff"
       ]
+    },
+    {
+      "name": "watch",
+      "source": {
+        "source": "github",
+        "repo": "bradautomates/claude-video",
+        "sha": "03ceb42f7fa2c4439aca01752118044baabffb8f"
+      },
+      "description": "Faz o Claude assistir um vídeo (link ou arquivo): com GEMINI_API_KEY o Gemini assiste imagem e som; sem a chave, tira quadros e transcrição. De bradautomates/claude-video (MIT), fixado no commit revisado.",
+      "homepage": "https://github.com/bradautomates/claude-video"
     }
   ]
 }

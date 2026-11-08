@@ -11,6 +11,8 @@
   "enabledPlugins": {
     "preferencias-felipe@claude-kit": true,
     "ecc@claude-kit": true,
-    "rtadewald-design@claude-kit": true
+    "rtadewald-design@claude-kit": true,
+    "aprendizado@claude-kit": true,
+    "watch@claude-kit": true
   }
 }

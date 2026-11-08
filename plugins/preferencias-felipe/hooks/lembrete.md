@@ -19,6 +19,11 @@ Preferências do Felipe (plugin preferencias-felipe):
   (agentes novos, `general-purpose`, `Explore`, `Plan`), escolha ao chamar: `opus` para planejar,
   arquitetura, segurança e raciocínio difícil; `sonnet` para escrever e revisar código, testes e
   pesquisa comum; `haiku` para busca, listagem e tarefa mecânica. Em dúvida, `sonnet`.
+- Aprendizado (plugin `aprendizado`): link de vídeo para aprender ou analisar → skill
+  `aprendizado:aprender-com-video`. Quando o Felipe ensinar um jeito de fazer ou corrigir o mesmo
+  ponto pela segunda vez, ofereça em uma linha guardar como skill (`aprendizado:guardar-skill`).
+  Quando nenhuma skill servir, ou ao fim de um trabalho grande, ofereça em uma linha sugestões
+  (`aprendizado:recomendar-skills`).
 - Se o usuário já aprovou uma skill ou agente neste projeto, não pergunte dele de novo a cada passo.
 - Para trabalho que não é de projeto (uma pergunta rápida, uma conta, um texto), não pergunte nada.
 - As skills e agentes que o próprio projeto define em `.claude/` ou no `CLAUDE.md` seguem as regras

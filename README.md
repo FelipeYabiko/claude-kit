@@ -6,6 +6,8 @@ Meu marketplace de plugins do Claude Code. Instalado uma vez, vale em todas as s
 |---|---|---|
 | `preferencias-felipe` | Ganchos de início de sessão e de cada mensagem: responder em português e, em projeto, avaliar quais skills e agentes servem, perguntar quais você quer usar e usar só os aprovados. Traz a skill `escolher-skills`, um mapa de qual skill ou agente usar em cada caso. | ~200 tokens + ~60 por mensagem |
 | `ecc` | ECC essencial: agentes `planner`, `tdd-guide`, `code-reviewer`, `python-reviewer` e `security-reviewer`, mais a skill `processo-ecc` com as regras `common`, `python`, `typescript` e `web`. | ~500 tokens |
+| `aprendizado` | Skills `aprender-com-video` (assistir um vídeo e guardar o que ele ensina como skill), `guardar-skill` (guardar como skill o que você ensinar ou corrigir) e `recomendar-skills` (sugerir skills para usar, instalar ou aprender). As skills que você guardar moram aqui; lista em `plugins/aprendizado/CATALOGO.md`. | ~250 tokens + ~100 por skill guardada |
+| `watch` | Faz o Claude assistir vídeos (link ou arquivo), de [bradautomates/claude-video](https://github.com/bradautomates/claude-video), fixado num commit revisado. Com `GEMINI_API_KEY`, o Gemini assiste imagem e som. | ~150 tokens |
 | `rtadewald-design` | 14 skills de [rtadewald/skills](https://github.com/rtadewald/skills), lidas direto de lá: `plan-screen`, `to-wireframe`, `img-to-html`, `animate`, `extract-ds`, `video2html`, `nano-banana-pro`, `to-img`, `openrouter-img`, `fal-ai`, `mediabunny`, `grill-me`, `to-tickets`, `handoff`. | ~1.600 tokens |
 
 ## Instalar
@@ -17,10 +19,12 @@ Meu marketplace de plugins do Claude Code. Instalado uma vez, vale em todas as s
 /plugin install preferencias-felipe@claude-kit
 /plugin install ecc@claude-kit
 /plugin install rtadewald-design@claude-kit
+/plugin install aprendizado@claude-kit
+/plugin install watch@claude-kit
 ```
 
 **Automático no computador:** o `.claude/settings.json` deste repositório registra o marketplace e
-ativa os três plugins quando você abre o projeto no Claude Code do computador (terminal, app ou IDE).
+ativa os cinco plugins quando você abre o projeto no Claude Code do computador (terminal, app ou IDE).
 O Claude Code pede para confiar na pasta e instalar os plugins na primeira vez. Para ter o mesmo em
 outro projeto, copie o arquivo para o `.claude/` dele; para valer em todos os projetos do computador,
 junte o mesmo conteúdo ao `~/.claude/settings.json`.
@@ -35,7 +39,9 @@ plugins da conta entram sozinhos em toda sessão nova, em qualquer repositório.
 2. Clique em **Add → Add marketplace** (não use a busca do **Discover**: ela só mostra o diretório
    oficial e os marketplaces já adicionados).
 3. Digite `FelipeYabiko/claude-kit` e confirme.
-4. Abra `preferencias-felipe`, `ecc` e `rtadewald-design` e clique em **Add** em cada um.
+4. Abra `preferencias-felipe`, `ecc`, `rtadewald-design`, `aprendizado` e `watch` e clique em **Add**
+   em cada um. Plugin novo no kit sempre precisa desse **Add** uma vez; o **Sync** só atualiza os que
+   você já adicionou.
 5. Opcional: ligue **Sync automatically** no marketplace para receber as mudanças deste repositório.
 
 No chat do claude.ai entram só as skills; ganchos e agentes funcionam no Claude Code e no Cowork.
@@ -76,6 +82,19 @@ agentes que o próprio projeto define em `.claude/` ou no `CLAUDE.md` seguem as 
 | "Transforma esse relatório em PDF" | Pergunta se pode usar `pdf` e segue com o que você aprovar |
 | Pergunta rápida | Responde direto, sem ferramenta |
 
+### Aprender com vídeos e crescer o kit
+
+| Você pede | O que acontece |
+|---|---|
+| "Assiste esse vídeo e aprende como ele faz o gancho: <link>" | O `watch` assiste, o Claude lista as lições que servem para os seus canais e pergunta se guarda como skill. Com o sim, salva no GitHub e ela passa a valer em toda sessão. |
+| "Guarda isso como regra daqui pra frente" | O Claude escreve a skill, mostra o que muda e salva com o seu OK. Regra de um projeto só vai para o `.claude/skills/` do projeto. |
+| "Que skill eu devia ter para thumbnails?" | Até 5 sugestões: já instalada, pronta para instalar ou vídeo para aprender, com o custo de cada uma. |
+
+Na nuvem, o `watch` funciona com links do YouTube e arquivos anexados, pelo Gemini. TikTok, Instagram e
+outros sites precisam baixar o vídeo, e a rede da nuvem costuma bloquear: use o mesmo vídeo no
+YouTube. O `watch` não funciona no chat do claude.ai nem no Cowork, só no Claude Code (nuvem ou
+computador).
+
 ### Atalhos
 
 - Digite `/` no campo de mensagem para ver todas as skills e comandos.
@@ -107,7 +126,7 @@ Algumas skills de design chamam serviços pagos. Sem a chave, elas não funciona
 
 | Skill | Variável |
 |---|---|
-| `nano-banana-pro`, `video2html` | `GEMINI_API_KEY` |
+| `nano-banana-pro`, `video2html`, `watch` | `GEMINI_API_KEY` |
 | `to-img`, `openrouter-img` | `OPENROUTER_API_KEY` |
 | `fal-ai` | `FAL_KEY` |
 
@@ -121,6 +140,11 @@ variáveis de ambiente do sistema.
   [Customize → Plugins](https://claude.ai/customize/plugins) e clique em **Check for updates** (ou
   deixe **Sync automatically** ligado). No computador, rode `/plugin marketplace update claude-kit`.
   A versão nova entra na próxima sessão.
+- `aprendizado` também mora aqui; a skill `guardar-skill` já aumenta a versão sozinha quando guarda
+  uma skill nova.
+- `watch` é lido de `bradautomates/claude-video`, no commit fixado em `sha` no
+  `.claude-plugin/marketplace.json`. Para pegar a versão nova, leia o que mudou e troque o `sha` pelo
+  commit novo.
 - `rtadewald-design` é lido do repositório original. Para pegar a versão nova, aumente `version` dele em
   `.claude-plugin/marketplace.json` e rode o mesmo update.
 - Para trazer mais coisas do ECC completo, copie de [affaan-m/ECC](https://github.com/affaan-m/ECC)
@@ -132,6 +156,8 @@ Valide antes do push: `claude plugin validate .`
 
 ## Créditos
 
+- `watch`: [bradautomates/claude-video](https://github.com/bradautomates/claude-video), © Bradley
+  Bonanno, licença MIT; este kit só aponta para ele.
 - `plugins/ecc`: recorte do [ECC](https://github.com/affaan-m/ECC), © Affaan Mustafa, licença MIT
   (`plugins/ecc/LICENSE`).
 - `rtadewald-design`: as skills ficam no repositório de [rtadewald](https://github.com/rtadewald/skills)

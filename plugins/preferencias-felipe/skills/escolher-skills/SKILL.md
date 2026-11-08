@@ -1,6 +1,6 @@
 ---
 name: escolher-skills
-description: Mapa de qual skill ou agente usar para cada tipo de pedido do Felipe (código, revisão, testes, segurança, planos, telas, imagens, animação, documentos, planilhas, PDF, pesquisa), para perguntar quais ele quer usar. Use quando não estiver claro qual skill ou agente instalado se aplica, quando o pedido combina várias etapas, ou quando o usuário perguntar quais skills usar.
+description: Mapa de qual skill ou agente usar para cada tipo de pedido do Felipe (código, revisão, testes, segurança, planos, telas, imagens, animação, documentos, planilhas, PDF, pesquisa, aprender com vídeos), para perguntar quais ele quer usar. Use quando não estiver claro qual skill ou agente instalado se aplica, quando o pedido combina várias etapas, ou quando o usuário perguntar quais skills usar.
 ---
 
 # Escolher skills
@@ -73,6 +73,18 @@ maioria dos passos é **(comando)**, sugira o próximo comando ao fim de cada et
 | Pesquisa com várias fontes e relatório | `deep-research` |
 | Criar ou melhorar uma skill | `skill-creator` |
 
+### Aprender e crescer (plugins `aprendizado` e `watch`)
+
+| Situação | Use |
+|---|---|
+| Assistir um vídeo e responder sobre ele | skill `watch` **(API do Gemini: cota grátis, depois paga)** |
+| Aprender com um vídeo (tutorial, concorrente) e guardar como skill | skill `aprendizado:aprender-com-video` (usa o `watch`) |
+| Guardar como skill o que o Felipe ensinou ou corrigiu | skill `aprendizado:guardar-skill` |
+| Que skill usar, instalar ou aprender; nenhuma serve; limpar o kit | skill `aprendizado:recomendar-skills` |
+
+As skills que o Felipe já guardou ficam no plugin `aprendizado` e aparecem sozinhas na sessão. A lista
+delas está em `plugins/aprendizado/CATALOGO.md` do claude-kit.
+
 ### Vídeos do Felipe (projeto `FelipeYabiko/criador-video-ranking`)
 
 Projeto Remotion (React) + Node que gera vídeo para YouTube, Shorts, TikTok, Reels e Facebook. Três
@@ -106,6 +118,6 @@ Sem a chave, a skill não roda: avise e ofereça outra opção.
 
 | Skill | Variável |
 |---|---|
-| `nano-banana-pro`, `video2html` | `GEMINI_API_KEY` |
+| `nano-banana-pro`, `video2html`, `watch` | `GEMINI_API_KEY` |
 | `to-img`, `openrouter-img` | `OPENROUTER_API_KEY` |
 | `fal-ai` | `FAL_KEY` |
