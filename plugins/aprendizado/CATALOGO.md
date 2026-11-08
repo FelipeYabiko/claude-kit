@@ -15,6 +15,6 @@ skill nova, e a `aprendizado:recomendar-skills` usa esta lista para evitar repet
 
 | Skill | O que ensina | Origem | Data |
 |---|---|---|---|
-| _(nenhuma ainda)_ | | | |
+| `recomendar-skills` (atualizada) | Ferramentas para testar: earshot (som), reanimate (animação), teardown (simulador 3D), Kensaku (busca no PC) e a receita fazer, medir, corrigir | Vídeo "Mais 15 projetos open source do GitHub que valem o seu tempo, Vol. 22" (Eddwan Hallen) | 08/11/2026 |
 
 Skills de um projeto só ficam no `.claude/skills/` do próprio projeto e não entram nesta lista.

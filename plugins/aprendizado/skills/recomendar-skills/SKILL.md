@@ -24,6 +24,9 @@ tempo ou repete correções.
 ## 2. Procurar em três lugares
 
 1. **Já tem e não usa:** uma skill instalada que serve para o que ele faz. É a sugestão mais barata.
+   Olhe também `referencias/ferramentas-para-testar.md`: ferramentas de fora que já foram estudadas
+   (som feito por programa, cópia de animação, simulador 3D, busca no PC) e a receita "fazer, medir,
+   corrigir" para criar skills novas.
 2. **Pronta para instalar:**
    - catálogo da conta do claude.ai: `SearchSkills` e `SearchPlugins`, se existirem na sessão;
    - repositórios públicos de skills: `gh api -X GET search/repositories -f q='claude skills <tema>'`
