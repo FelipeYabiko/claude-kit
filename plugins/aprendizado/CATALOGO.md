@@ -16,5 +16,6 @@ skill nova, e a `aprendizado:recomendar-skills` usa esta lista para evitar repet
 | Skill | O que ensina | Origem | Data |
 |---|---|---|---|
 | `recomendar-skills` (atualizada) | Ferramentas para testar: earshot (som), reanimate (animação), teardown (simulador 3D), Kensaku (busca no PC) e a receita fazer, medir, corrigir | Vídeo "Mais 15 projetos open source do GitHub que valem o seu tempo, Vol. 22" (Eddwan Hallen) | 08/11/2026 |
+| `commits-limpos` | Commits e PRs com o nome do Felipe, sem assinatura do Claude, em branch organizada e sem mexer na `main` | Conversa sobre o projeto CredFácil (Hack Brasil) | 10/11/2026 |
 
 Skills de um projeto só ficam no `.claude/skills/` do próprio projeto e não entram nesta lista.
