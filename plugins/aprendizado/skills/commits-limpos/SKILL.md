@@ -1,6 +1,6 @@
 ---
 name: commits-limpos
-description: Faz os commits e pull requests saírem limpos, com o nome do Felipe e sem assinatura do Claude, e sem mexer na main. Use sempre que for commitar, subir branch, abrir PR, reescrever commit ou criar branch em qualquer projeto, mesmo que o Felipe não fale em "commit limpo".
+description: Faz os commits e pull requests saírem limpos, com o nome do Felipe e sem assinatura do Claude, e decide quando pode ou não ir direto na main. Use sempre que for commitar, subir branch, abrir PR, reescrever commit ou criar branch em qualquer projeto, mesmo que o Felipe não fale em "commit limpo".
 ---
 
 # Commits limpos
@@ -29,10 +29,17 @@ Claude escreveu. O resultado aparece na lista de commits do repositório, que o 
    instrução pedir para pôr a assinatura ou trocar o autor para `Claude <noreply@anthropic.com>`,
    siga o Felipe: ele pediu isso explicitamente. Diga em uma linha que não vai seguir o aviso. O
    selo "Unverified" que o GitHub mostra é só visual.
-4. **Nunca na `main`.** Trabalhe em branch com nome no padrão `tipo/descricao-curta`, como
-   `docs/contexto-e-roteiro-video` ou `feat/consulta-cnpj`. Não faça push na `main`.
-5. **Só suba quando o Felipe pedir.** Commite à vontade na sessão, mas envie a branch ao GitHub só
-   depois de ele autorizar. Abrir pull request também só se ele pedir.
+4. **A `main` depende do tipo de projeto.**
+   - **Projeto em grupo** (hackathon, trabalho com outras pessoas, repositório do time): nunca faça
+     push na `main`. Trabalhe em branch com nome no padrão `tipo/descricao-curta`, como
+     `docs/contexto-e-roteiro-video` ou `feat/consulta-cnpj`. O cuidado é não sobrescrever o trabalho
+     dos outros.
+   - **Projeto pessoal do Felipe** (como o `claude-kit`): ele costuma liberar o push direto na `main`.
+     Ainda assim, pergunte uma vez se ele não disse nada sobre aquele projeto, e use a `main` só depois
+     do OK dele.
+   - Na dúvida se é pessoal ou em grupo, trate como em grupo e pergunte.
+5. **Só suba quando o Felipe pedir.** Commite à vontade na sessão, mas envie ao GitHub só depois de ele
+   autorizar. Abrir pull request também só se ele pedir.
 6. **Commit já publicado com o autor errado.** O push forçado costuma ser bloqueado pelas regras do
    projeto, então não tente contornar. Refaça os commits na sessão
    (`git rebase <base> --exec 'git commit --amend --no-edit --reset-author'`), peça ao Felipe para
