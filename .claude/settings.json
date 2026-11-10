@@ -13,6 +13,7 @@
     "ecc@claude-kit": true,
     "rtadewald-design@claude-kit": true,
     "aprendizado@claude-kit": true,
-    "watch@claude-kit": true
+    "watch@claude-kit": true,
+    "andrej-karpathy-skills@claude-kit": true
   }
 }

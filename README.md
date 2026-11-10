@@ -8,6 +8,7 @@ Meu marketplace de plugins do Claude Code. Instalado uma vez, vale em todas as s
 | `ecc` | ECC essencial: agentes `planner`, `tdd-guide`, `code-reviewer`, `python-reviewer` e `security-reviewer`, mais a skill `processo-ecc` com as regras `common`, `python`, `typescript` e `web`. | ~500 tokens |
 | `aprendizado` | Skills `aprender-com-video` (assistir um vídeo e guardar o que ele ensina como skill), `guardar-skill` (guardar como skill o que você ensinar ou corrigir) e `recomendar-skills` (sugerir skills para usar, instalar ou aprender). As skills que você guardar moram aqui; lista em `plugins/aprendizado/CATALOGO.md`. | ~250 tokens + ~100 por skill guardada |
 | `watch` | Faz o Claude assistir vídeos (link ou arquivo), de [bradautomates/claude-video](https://github.com/bradautomates/claude-video), fixado num commit revisado. Com `GEMINI_API_KEY`, o Gemini assiste imagem e som. | ~150 tokens |
+| `andrej-karpathy-skills` | Skill `karpathy-guidelines`, de [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills), fixada num commit revisado: 4 regras para o Claude programar melhor (pensar antes, fazer o simples, mexer só no necessário, verificar o resultado). | ~100 tokens |
 | `rtadewald-design` | 14 skills de [rtadewald/skills](https://github.com/rtadewald/skills), lidas direto de lá: `plan-screen`, `to-wireframe`, `img-to-html`, `animate`, `extract-ds`, `video2html`, `nano-banana-pro`, `to-img`, `openrouter-img`, `fal-ai`, `mediabunny`, `grill-me`, `to-tickets`, `handoff`. | ~1.600 tokens |
 
 ## Instalar
@@ -21,10 +22,11 @@ Meu marketplace de plugins do Claude Code. Instalado uma vez, vale em todas as s
 /plugin install rtadewald-design@claude-kit
 /plugin install aprendizado@claude-kit
 /plugin install watch@claude-kit
+/plugin install andrej-karpathy-skills@claude-kit
 ```
 
 **Automático no computador:** o `.claude/settings.json` deste repositório registra o marketplace e
-ativa os cinco plugins quando você abre o projeto no Claude Code do computador (terminal, app ou IDE).
+ativa os seis plugins quando você abre o projeto no Claude Code do computador (terminal, app ou IDE).
 O Claude Code pede para confiar na pasta e instalar os plugins na primeira vez. Para ter o mesmo em
 outro projeto, copie o arquivo para o `.claude/` dele; para valer em todos os projetos do computador,
 junte o mesmo conteúdo ao `~/.claude/settings.json`.
@@ -39,7 +41,8 @@ plugins da conta entram sozinhos em toda sessão nova, em qualquer repositório.
 2. Clique em **Add → Add marketplace** (não use a busca do **Discover**: ela só mostra o diretório
    oficial e os marketplaces já adicionados).
 3. Digite `FelipeYabiko/claude-kit` e confirme.
-4. Abra `preferencias-felipe`, `ecc`, `rtadewald-design`, `aprendizado` e `watch` e clique em **Add**
+4. Abra `preferencias-felipe`, `ecc`, `rtadewald-design`, `aprendizado`, `watch` e
+   `andrej-karpathy-skills` e clique em **Add**
    em cada um. Plugin novo no kit sempre precisa desse **Add** uma vez; o **Sync** só atualiza os que
    você já adicionou.
 5. Opcional: ligue **Sync automatically** no marketplace para receber as mudanças deste repositório.
@@ -145,6 +148,8 @@ variáveis de ambiente do sistema.
 - `watch` é lido de `bradautomates/claude-video`, no commit fixado em `sha` no
   `.claude-plugin/marketplace.json`. Para pegar a versão nova, leia o que mudou e troque o `sha` pelo
   commit novo.
+- `andrej-karpathy-skills` é lido de `forrestchang/andrej-karpathy-skills`, no commit fixado em `sha`;
+  atualize do mesmo jeito do `watch`.
 - `rtadewald-design` é lido do repositório original. Para pegar a versão nova, aumente `version` dele em
   `.claude-plugin/marketplace.json` e rode o mesmo update.
 - Para trazer mais coisas do ECC completo, copie de [affaan-m/ECC](https://github.com/affaan-m/ECC)
@@ -158,6 +163,8 @@ Valide antes do push: `claude plugin validate .`
 
 - `watch`: [bradautomates/claude-video](https://github.com/bradautomates/claude-video), © Bradley
   Bonanno, licença MIT; este kit só aponta para ele.
+- `andrej-karpathy-skills`: [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills),
+  licença MIT, a partir das observações de Andrej Karpathy; este kit só aponta para ele.
 - `plugins/ecc`: recorte do [ECC](https://github.com/affaan-m/ECC), © Affaan Mustafa, licença MIT
   (`plugins/ecc/LICENSE`).
 - `rtadewald-design`: as skills ficam no repositório de [rtadewald](https://github.com/rtadewald/skills)

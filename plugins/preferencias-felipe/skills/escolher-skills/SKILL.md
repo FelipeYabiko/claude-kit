@@ -33,6 +33,7 @@ achar quais combinam com o pedido, principalmente quando mais de uma serve, ou n
 | Situação | Use |
 |---|---|
 | Começar projeto ou mudança grande de código | skill `ecc:processo-ecc` |
+| Qualquer código (escrever, revisar, refatorar): evitar complicar, mexer só no necessário, dizer as dúvidas | skill `andrej-karpathy-skills:karpathy-guidelines` |
 | Planejar feature, refatoração ou arquitetura | agente `ecc:planner` (ou skill `writing-plans`) |
 | Escrever feature, corrigir bug | agente `ecc:tdd-guide` (teste antes do código) |
 | Depois de escrever código | agente `ecc:code-reviewer`; em Python também `ecc:python-reviewer` |

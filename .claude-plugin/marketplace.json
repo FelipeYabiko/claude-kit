@@ -58,6 +58,16 @@
       },
       "description": "Faz o Claude assistir um vídeo (link ou arquivo): com GEMINI_API_KEY o Gemini assiste imagem e som; sem a chave, tira quadros e transcrição. De bradautomates/claude-video (MIT), fixado no commit revisado.",
       "homepage": "https://github.com/bradautomates/claude-video"
+    },
+    {
+      "name": "andrej-karpathy-skills",
+      "source": {
+        "source": "github",
+        "repo": "forrestchang/andrej-karpathy-skills",
+        "sha": "2c606141936f1eeef17fa3043a72095b4765b9c2"
+      },
+      "description": "Regras do Andrej Karpathy para o Claude programar melhor: pensar antes de codar, fazer o mais simples, mexer só no necessário e definir como verificar o resultado. De forrestchang/andrej-karpathy-skills (MIT), fixado no commit revisado.",
+      "homepage": "https://github.com/forrestchang/andrej-karpathy-skills"
     }
   ]
 }
