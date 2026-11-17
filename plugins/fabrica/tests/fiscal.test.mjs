@@ -252,6 +252,16 @@ test('conteúdo de exemplo: aviso enquanto se trabalha, erro na entrega; lorem i
 	assert.equal(normal.erros.length, 0);
 	assert.equal((await site(arquivos, {final: true})).de('conteudo-de-exemplo', 'erro').length, 2);
 	assert.ok((await site({'site/index.html': pagina('<h1>A</h1><p>Lorem ipsum dolor sit amet.</p>')})).erro('conteudo-de-exemplo', /lorem ipsum/));
+	const antigas = await site({'site/index.html': pagina('<h1>A</h1><img src="images/exemplo.png" alt="a" width="1" height="1"><img src="images/exemplo2.png" alt="b" width="1" height="1"><img src="img/placeholder_1.jpg" alt="c" width="1" height="1"><img src="images/exemplos-de-uso.png" alt="d" width="1" height="1">'), 'site/images/exemplo.png': 'x', 'site/images/exemplo2.png': 'x', 'site/img/placeholder_1.jpg': 'x', 'site/images/exemplos-de-uso.png': 'x'});
+	assert.ok(antigas.aviso('conteudo-de-exemplo', /3 imagem\(ns\) de exemplo, que só seguram o lugar \(exemplo\.png, exemplo2\.png, placeholder_1\.jpg\)/), 'nome parecido ("exemplos-de-uso") não conta');
+});
+
+test('link que ainda é de exemplo: perfil "seu-...", e-mail de exemplo e telefone 9999', async () => {
+	const miolo = '<h1>A</h1><a href="https://linkedin.com/in/seu-linkedin" aria-label="LinkedIn"></a><a href="mailto:contato@exemplo.com.br">E-mail</a><a href="https://wa.me/5511999999999">WhatsApp</a><a href="https://github.com/FelipeYabiko" aria-label="GitHub"></a><a href="https://linkedin.com/in/maria-souza">LinkedIn</a><a href="mailto:ana@exemploseguros.com.br">Seguros</a><a href="https://x.com" data-exemplo>Marcado</a>';
+	const r = await site({'site/index.html': pagina(miolo)});
+	assert.equal(r.de('conteudo-de-exemplo').filter((m) => /link que ainda é de exemplo/.test(m)).length, 3);
+	assert.ok(r.aviso('conteudo-de-exemplo', /"https:\/\/linkedin\.com\/in\/seu-linkedin"/));
+	assert.ok((await site({'site/index.html': pagina(miolo)}, {final: true})).erro('conteudo-de-exemplo', /seu-linkedin/));
 });
 
 test('a biblioteca de seções (pedaços para copiar) não é conferida como página', async () => {

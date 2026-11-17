@@ -34,8 +34,14 @@ const titulo = opcao('titulo') ?? de('h1') ?? marca;
 const escapar = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const estilo = (arquivo) => pathToFileURL(path.join(pastaDoSite, 'estilo', arquivo)).href;
 
+// site antigo (adotado) não tem os tokens da fábrica: a capa sai com cores e fontes neutras, que os tokens
+// substituem quando existirem
+const folhas = ['tokens.css', 'base.css'].filter((f) => fs.existsSync(path.join(pastaDoSite, 'estilo', f)));
+const PADRAO = '*, *::before, *::after { box-sizing: border-box; } :root { --cor-fundo: #f6f5f2; --cor-texto: #1b1b1f; --cor-destaque: #2f5bea; --fonte-titulo: system-ui, -apple-system, "Segoe UI", sans-serif; --peso-titulo: 700; --aperto-titulo: -0.02em; } body { margin: 0; background: var(--cor-fundo); color: var(--cor-texto); font-family: var(--fonte-titulo); } h1 { margin: 0; font-family: var(--fonte-titulo); font-weight: var(--peso-titulo); letter-spacing: var(--aperto-titulo); }';
+if (!folhas.length) console.log('Este site não tem estilo/tokens.css: a capa sai com cores neutras. Para a capa ter as cores do site, crie os tokens (veja docs/manual.md).');
+
 const pagina = `<!doctype html><html lang="pt-BR" data-tema="claro"><head><meta charset="utf-8">
-<link rel="stylesheet" href="${estilo('tokens.css')}"><link rel="stylesheet" href="${estilo('base.css')}">
+<style>${PADRAO}</style>${folhas.map((f) => `<link rel="stylesheet" href="${estilo(f)}">`).join('')}
 <style>
 	body { width: 1200px; height: 630px; display: grid; grid-template-rows: auto 1fr auto; padding: 64px 72px; overflow: hidden; }
 	.marca { font-family: var(--fonte-titulo); font-weight: var(--peso-titulo); font-size: 34px; letter-spacing: var(--aperto-titulo); }
@@ -50,8 +56,10 @@ try {
 	const aba = await navegador.newPage({viewport: {width: 1200, height: 630}, colorScheme: 'light'});
 	await aba.goto(pathToFileURL(temporario).href, {waitUntil: 'load'});
 	await aba.evaluate(() => document.fonts.ready);
-	fs.mkdirSync(path.join(pastaDoSite, 'imagens'), {recursive: true});
-	const saida = path.join(pastaDoSite, 'imagens', 'capa-para-redes.png');
+	// usa a pasta de imagens que o site já tem (site antigo costuma ter images/)
+	const pastaImagens = ['imagens', 'images', 'img'].find((p) => fs.existsSync(path.join(pastaDoSite, p))) ?? 'imagens';
+	fs.mkdirSync(path.join(pastaDoSite, pastaImagens), {recursive: true});
+	const saida = path.join(pastaDoSite, pastaImagens, 'capa-para-redes.png');
 	await aba.screenshot({path: saida});
 	console.log(`Capa gravada em ${path.relative(raiz, saida).split(path.sep).join('/')} (${Math.round(fs.statSync(saida).size / 1024)} KB). Abra e olhe: o título cabe? Dá para ler pequeno?`);
 } finally {

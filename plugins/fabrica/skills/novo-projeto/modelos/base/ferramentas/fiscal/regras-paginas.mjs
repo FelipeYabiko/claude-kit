@@ -19,6 +19,9 @@ const resolver = (deArquivo, endereco) => {
 	return normal.endsWith('/') || normal === '.' ? path.posix.join(normal, 'index.html') : normal;
 };
 
+/** Pedaços de endereço que só aparecem em link de exemplo. */
+const LINK_DE_EXEMPLO = /\/(seu|sua|your)[-_]|[/@.](exemplo|example)\.(com|org|net)\b|9{4,}-?9{4}|(seu|your)usuario|SEU[_-]?USUARIO/i;
+
 const VAGOS = /^(clique aqui|aqui|saiba mais|leia mais|ver mais|link|click here|here|more)$/i;
 const IMAGEM = /\.(png|jpe?g|gif|webp|avif|svg)$/i;
 
@@ -236,8 +239,13 @@ export const regrasPaginas = [
 				const tags = lerTags(html);
 				const exemplos = tags.filter((t) => 'data-exemplo' in t.atributos);
 				if (exemplos.length) achados.push({nivel, arquivo, linha: exemplos[0].linha, mensagem: `${exemplos.length} trecho(s) ainda com o texto de exemplo do modelo (marcados com \`data-exemplo\`): troque pelo conteúdo do dono e apague a marca`});
-				const imagens = tags.filter((t) => /(^|\/)exemplo-[^/]+$/.test(t.atributos.src ?? ''));
-				if (imagens.length) achados.push({nivel, arquivo, linha: imagens[0].linha, mensagem: `${imagens.length} imagem(ns) de exemplo do modelo (\`exemplo-*.svg\`): troque pelas imagens do dono`});
+				// exemplo-capa.svg (modelo da fábrica), exemplo.png, exemplo2.jpg (sites antigos): imagem que só segura o lugar
+				const imagens = tags.filter((t) => /(^|\/)(exemplo|placeholder)([-_\d][^/]*)?\.[a-z0-9]+$/i.test(t.atributos.src ?? ''));
+				if (imagens.length) achados.push({nivel, arquivo, linha: imagens[0].linha, mensagem: `${imagens.length} imagem(ns) de exemplo, que só seguram o lugar (${imagens.map((t) => t.atributos.src.split('/').pop()).join(', ')}): troque pelas imagens do dono`});
+				// endereço que ainda é o de exemplo (perfil "seu-linkedin", e-mail @exemplo.com, telefone 99999-9999):
+				// o visitante clica e cai em lugar nenhum. O texto marcado com data-exemplo já é contado acima.
+				const falsos = tags.filter((t) => !('data-exemplo' in t.atributos) && /^(https?:|mailto:|tel:)/i.test(t.atributos.href ?? '') && LINK_DE_EXEMPLO.test(t.atributos.href));
+				for (const t of falsos) achados.push({nivel, arquivo, linha: t.linha, mensagem: `link que ainda é de exemplo ("${t.atributos.href}"): troque pelo endereço de verdade ou tire o link`});
 				const lorem = html.match(/lorem ipsum/i);
 				if (lorem) achados.push(erro('texto "lorem ipsum": nunca entregue texto falso, escreva o texto real (ou pergunte ao dono)', {arquivo, linha: linhaDe(html, lorem.index)}));
 			}

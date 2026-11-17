@@ -1,6 +1,6 @@
 {
 	"name": "fabrica",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Fábrica de projetos: transforma uma ideia (site, sistema, robô ou outra coisa) num projeto novo que já funciona, com entrevista, ficha do combinado, modelos prontos, fiscal automático, folha de telas e manual passo a passo, para qualquer modelo do Claude manter o padrão.",
 	"author": {
 		"name": "Felipe Yabiko"
