@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{NOME_HTML}}</title>
+	<link rel="icon" href="icone.svg" type="image/svg+xml">
+	<link rel="stylesheet" href="tokens.css">
+	<link rel="stylesheet" href="estilo.css">
+	<!-- aplica o tema escolhido antes de desenhar, para a tela não piscar -->
+	<script src="tema.js"></script>
+</head>
+<body>
+	<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+	<div class="casca">
+		<aside class="lateral" aria-label="Menu do sistema">
+			<a class="lateral__marca" href="#/">{{NOME_HTML}}</a>
+			<nav class="lateral__nav" id="menu" aria-label="Cadastros"></nav>
+			<div class="lateral__pe">
+				<a class="lateral__acao" href="/api/copia" download>Baixar cópia dos dados</a>
+				<button class="lateral__acao" type="button" id="trocar-tema">Tema claro ou escuro</button>
+			</div>
+		</aside>
+		<main class="miolo" id="conteudo" tabindex="-1">
+			<p class="carregando">Abrindo o sistema…</p>
+		</main>
+	</div>
+	<div class="avisos" id="avisos" role="status" aria-live="polite"></div>
+	<noscript><p class="carregando">Este sistema precisa do JavaScript ligado no navegador.</p></noscript>
+	<script type="module" src="app.js"></script>
+</body>
+</html>

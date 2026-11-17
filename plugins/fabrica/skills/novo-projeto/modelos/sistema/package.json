@@ -1,0 +1,6 @@
+{
+	"scripts": {
+		"start": "node servidor.mjs",
+		"telas": "node ferramentas/folha-de-telas.mjs"
+	}
+}

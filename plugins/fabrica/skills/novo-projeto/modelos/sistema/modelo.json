@@ -1,0 +1,6 @@
+{
+	"nome": "sistema",
+	"descricao": "Sistema de cadastros que roda no computador do dono (clientes, projetos, estoque, finanças, tarefas...): descreve-se os cadastros num arquivo e as telas de lista, formulário, busca, filtros, painel e exportação para planilha aparecem sozinhas. Sem instalar nada.",
+	"atualizaveis": ["ferramentas", ".claude/hooks", "motor", "telas/app.js", "telas/estilo.css", "telas/tema.js", "telas/index.html", "tests/motor.test.mjs"],
+	"protegidos": ["ferramentas/fiscal/regras-do-projeto.mjs"]
+}

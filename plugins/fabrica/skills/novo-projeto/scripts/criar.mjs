@@ -11,6 +11,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync, spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
 const aqui = path.dirname(fileURLToPath(import.meta.url));
@@ -133,8 +134,14 @@ const gravar = (destino, rel, conteudo) => {
 	if (/\.(command|sh)$/i.test(rel)) fs.chmodSync(inteiro, 0o755);
 };
 
+const paraHtml = (texto) => texto.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
 const valoresDe = ({nome, descricao, tipo, pasta}) => ({
 	NOME: nome,
+	// o mesmo nome, pronto para cada lugar onde entra: dentro de HTML e dentro de um texto de JavaScript entre aspas simples
+	NOME_HTML: paraHtml(nome),
+	NOME_JS: nome.replace(/\\/g, '\\\\').replace(/'/g, "\\'"),
+	DESCRICAO_HTML: paraHtml(descricao),
 	NOME_ARQUIVO: paraArquivo(nome),
 	INICIAL: (semAcento(nome).match(/[A-Za-z0-9]/)?.[0] ?? 'A').toUpperCase(),
 	PASTA: paraPasta(path.basename(path.resolve(pasta))) || paraPasta(nome),
@@ -145,6 +152,30 @@ const valoresDe = ({nome, descricao, tipo, pasta}) => ({
 	TIPO: tipo,
 	VERSAO,
 });
+
+/** As peças que são da fábrica (fiscal, travas, motor) num projeto de certo tipo: {atualizaveis, protegidos}. */
+const pecasDe = (tipo) => {
+	const base = lerManifesto('livre');
+	const doTipo = tipo === 'livre' ? base : lerManifesto(tipo);
+	return {atualizaveis: [...new Set([...base.atualizaveis, ...(doTipo.atualizaveis ?? [])])], protegidos: new Set([...base.protegidos, ...(doTipo.protegidos ?? [])])};
+};
+
+const ehPeca = (arquivo, {atualizaveis, protegidos}) => !protegidos.has(arquivo) && atualizaveis.some((a) => arquivo === a || arquivo.startsWith(`${a}/`));
+
+/**
+ * A "assinatura" de cada peça da fábrica no projeto ({arquivo: resumo do conteúdo}). Fica no fabrica.json; o fiscal
+ * compara e avisa quando uma peça foi mexida à mão (o conserto certo é na fábrica, para valer em todos os projetos).
+ */
+export const assinarPecas = (destino, tipo) => {
+	const pecas = pecasDe(tipo);
+	const assinaturas = {};
+	for (const rel of listar(destino)) {
+		if (rel.startsWith('node_modules/') || rel.startsWith('.git/') || !ehPeca(rel, pecas)) continue;
+		// fim de linha não conta: o git do Windows pode trocar
+		assinaturas[rel] = createHash('sha256').update(fs.readFileSync(path.join(destino, rel), 'utf8').replace(/\r\n/g, '\n')).digest('hex').slice(0, 12);
+	}
+	return assinaturas;
+};
 
 /** Cria o projeto. Devolve a lista de arquivos gravados. Lança erro (com mensagem para o dono) se algo impedir. */
 export const criarProjeto = ({tipo, pasta, nome, descricao = '', estilo, ficha}) => {
@@ -171,7 +202,7 @@ export const criarProjeto = ({tipo, pasta, nome, descricao = '', estilo, ficha})
 		gravados.push(final);
 	}
 	if (ficha) fs.copyFileSync(path.resolve(ficha), path.join(destino, 'FICHA.md'));
-	fs.writeFileSync(path.join(destino, 'fabrica.json'), `${JSON.stringify({fabrica: VERSAO, tipo, nome, ...(estilos.length ? {estilo: estiloFinal} : {}), criadoEm: new Date().toISOString().slice(0, 10)}, null, '\t')}\n`);
+	fs.writeFileSync(path.join(destino, 'fabrica.json'), `${JSON.stringify({fabrica: VERSAO, tipo, nome, ...(estilos.length ? {estilo: estiloFinal} : {}), criadoEm: new Date().toISOString().slice(0, 10), pecas: assinarPecas(destino, tipo)}, null, '\t')}\n`);
 	gravados.push('fabrica.json');
 	return gravados.sort();
 };
@@ -222,7 +253,7 @@ export const adotarProjeto = ({pasta, tipo = 'livre', nome, descricao = ''}) => 
 	}
 	const arquivoFabrica = path.join(destino, 'fabrica.json');
 	if (!fs.existsSync(arquivoFabrica)) {
-		fs.writeFileSync(arquivoFabrica, `${JSON.stringify({fabrica: VERSAO, tipo, nome: nomeFinalDoProjeto, adotadoEm: new Date().toISOString().slice(0, 10)}, null, '\t')}\n`);
+		fs.writeFileSync(arquivoFabrica, `${JSON.stringify({fabrica: VERSAO, tipo, nome: nomeFinalDoProjeto, adotadoEm: new Date().toISOString().slice(0, 10), pecas: assinarPecas(destino, 'livre')}, null, '\t')}\n`);
 		criados.push('fabrica.json');
 	}
 	return {criados: criados.sort(), mantidos: mantidos.sort()};
@@ -238,22 +269,19 @@ export const atualizarProjeto = ({pasta}) => {
 	if (!fs.existsSync(arquivoFabrica)) throw new Error(`${destino} não tem fabrica.json: não é um projeto da fábrica (use --adotar).`);
 	const fabrica = JSON.parse(fs.readFileSync(arquivoFabrica, 'utf8'));
 	const tipo = TIPOS.includes(fabrica.tipo) ? fabrica.tipo : 'livre';
-	const base = lerManifesto('livre');
-	const doTipo = tipo === 'livre' ? base : lerManifesto(tipo);
-	const atualizaveis = [...new Set([...base.atualizaveis, ...(doTipo.atualizaveis ?? [])])];
-	const protegidos = new Set([...base.protegidos, ...(doTipo.protegidos ?? [])]);
+	const pecas = pecasDe(tipo);
 	const valores = valoresDe({nome: fabrica.nome ?? path.basename(destino), descricao: '', tipo, pasta: destino});
 	const atualizados = [];
 	for (const [rel, conteudo] of montarArquivos(tipo, {estilo: undefined})) {
 		const final = nomeFinal(rel, valores);
-		if (protegidos.has(final) || !atualizaveis.some((a) => final === a || final.startsWith(`${a}/`))) continue;
+		if (!ehPeca(final, pecas)) continue;
 		const novo = BINARIO.test(rel) ? conteudo : Buffer.from(preencher(conteudo.toString('utf8'), valores));
 		const inteiro = path.join(destino, final);
 		if (fs.existsSync(inteiro) && fs.readFileSync(inteiro).equals(novo)) continue;
 		gravar(destino, final, novo);
 		atualizados.push(final);
 	}
-	fs.writeFileSync(arquivoFabrica, `${JSON.stringify({...fabrica, fabrica: VERSAO, atualizadoEm: new Date().toISOString().slice(0, 10)}, null, '\t')}\n`);
+	fs.writeFileSync(arquivoFabrica, `${JSON.stringify({...fabrica, fabrica: VERSAO, atualizadoEm: new Date().toISOString().slice(0, 10), pecas: assinarPecas(destino, tipo)}, null, '\t')}\n`);
 	return {atualizados: atualizados.sort(), versaoAntiga: fabrica.fabrica};
 };
 

@@ -124,6 +124,8 @@ export const regrasPaginas = [
 							achados.push({nivel: p.final ? 'erro' : 'aviso', arquivo, linha: t.linha, mensagem: 'link vazio (`href="#"`): aponte para o lugar certo ou tire o link'});
 							continue;
 						}
+						// rota de aplicativo ("#/clientes") e endereço da API não são arquivo nem âncora da página
+						if (p.tipo === 'sistema' && (/^#[/!]/.test(endereco) || endereco.startsWith('/api/'))) continue;
 						if (endereco.startsWith('/') && p.tipo === 'site') {
 							achados.push(erro(`caminho começando com "/" ("${endereco}"): no GitHub Pages o site mora numa subpasta e isso quebra. Use caminho relativo ("imagens/foto.jpg")`, {arquivo, linha: t.linha}));
 							continue;

@@ -1,0 +1,75 @@
+/* Tokens do sistema: o ÚNICO arquivo com cores, fontes, raios e sombras. Cada cor é light-dark(clara, escura), em
+   #hex, para o fiscal conferir o contraste dos dois temas. Para dar a cara do dono: troque --cor-destaque (e o par
+   --cor-destaque-texto / --cor-sobre-destaque) e rode `npm run fiscal`. */
+
+:root {
+	color-scheme: light dark;
+
+	/* ---------- Cores ---------- */
+	--cor-fundo: light-dark(#f5f6f4, #101413);
+	--cor-superficie: light-dark(#ffffff, #181d1c);
+	--cor-realce: light-dark(#eceeeb, #1f2625);
+	--cor-texto: light-dark(#161c1b, #e8eeec);
+	--cor-texto-suave: light-dark(#55615f, #9aa8a5);
+	--cor-borda: light-dark(#dde1de, #2a3231);
+	--cor-borda-forte: light-dark(#a9b3b0, #47534f);
+	--cor-destaque: light-dark(#1f5f5b, #5fc9bf);
+	--cor-sobre-destaque: light-dark(#ffffff, #06201d);
+	--cor-destaque-texto: light-dark(#1a5753, #6fd3c9);
+	--cor-sombra: light-dark(#161c1b, #000000);
+
+	/* Tons das etiquetas e dos avisos: fundo suave + texto forte de cada um */
+	--cor-ok: light-dark(#dff3e4, #17301f);
+	--cor-sobre-ok: light-dark(#14522a, #8fdca6);
+	--cor-alerta: light-dark(#fbefc9, #33290c);
+	--cor-sobre-alerta: light-dark(#6b4a00, #ecc55f);
+	--cor-perigo: light-dark(#fbe0dc, #3a1714);
+	--cor-sobre-perigo: light-dark(#8f1d12, #f3a096);
+	--cor-neutro: light-dark(#e9ecea, #262e2c);
+	--cor-sobre-neutro: light-dark(#3d4846, #b9c5c2);
+	--cor-marcado: light-dark(#dcefed, #16302d);
+	--cor-sobre-marcado: light-dark(#124a46, #7fd8cf);
+	--cor-erro: light-dark(#b3261a, #f08a7e);
+
+	/* ---------- Fontes: as do próprio aparelho (abre na hora e parece programa de verdade) ---------- */
+	--fonte-texto: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	--fonte-numero: ui-monospace, "Cascadia Code", "Segoe UI Mono", Consolas, monospace;
+
+	/* ---------- Tamanhos de texto ---------- */
+	--tam-0: 0.8125rem;
+	--tam-1: 0.9375rem;
+	--tam-2: 1rem;
+	--tam-3: 1.25rem;
+	--tam-4: 1.625rem;
+	--tam-5: 2.125rem;
+
+	/* ---------- Forma ---------- */
+	--raio-p: 6px;
+	--raio-m: 10px;
+	--raio-g: 14px;
+	--sombra-1: 0 1px 2px color-mix(in srgb, var(--cor-sombra) 8%, transparent);
+	--sombra-2: 0 8px 24px -8px color-mix(in srgb, var(--cor-sombra) 22%, transparent);
+	--sombra-3: 0 24px 60px -20px color-mix(in srgb, var(--cor-sombra) 45%, transparent);
+
+	/* ---------- Espaços ---------- */
+	--esp-1: 0.25rem;
+	--esp-2: 0.5rem;
+	--esp-3: 0.75rem;
+	--esp-4: 1rem;
+	--esp-5: 1.5rem;
+	--esp-6: 2rem;
+	--esp-7: 3rem;
+
+	/* ---------- Movimento ---------- */
+	--tempo-1: 120ms;
+	--tempo-2: 220ms;
+	--curva: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+:root[data-tema="claro"] {
+	color-scheme: light;
+}
+
+:root[data-tema="escuro"] {
+	color-scheme: dark;
+}

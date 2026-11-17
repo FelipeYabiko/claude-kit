@@ -1,5 +1,6 @@
 // Regras que valem para qualquer projeto da fábrica. Cada uma nasceu de um problema real (segredo vazado, nome que
 // quebra no Windows, projeto sem painel que a conversa seguinte não entende). Regra nova: teste primeiro.
+import {createHash} from 'node:crypto';
 import {linhaDe} from './nucleo.mjs';
 
 const erro = (mensagem, extra = {}) => ({nivel: 'erro', mensagem, ...extra});
@@ -200,6 +201,21 @@ export const regrasGerais = [
 				const provisorio = texto.match(/PROVIS[ÓO]RIO/);
 				if (provisorio) achados.push({nivel: p.final ? 'erro' : 'aviso', arquivo, linha: linhaDe(texto, provisorio.index), mensagem: 'trecho marcado como PROVISÓRIO: troque pela versão de verdade antes de entregar'});
 			}
+			return achados;
+		},
+	},
+	{
+		id: 'pecas-da-fabrica',
+		tipos: ['*'],
+		checar: (p) => {
+			const mexidas = Object.entries(p.fabrica.pecas ?? {}).filter(([arquivo, assinatura]) => {
+				const texto = p.ler(arquivo);
+				return texto !== null && createHash('sha256').update(texto.replace(/\r\n/g, '\n')).digest('hex').slice(0, 12) !== assinatura;
+			});
+			const sumidas = Object.keys(p.fabrica.pecas ?? {}).filter((arquivo) => !p.existe(arquivo));
+			const achados = [];
+			if (mexidas.length) achados.push(aviso(`peça(s) da fábrica mexida(s) à mão: ${mexidas.map(([a]) => a).join(', ')}. A próxima atualização da fábrica desfaz. Se era um conserto, anote no diário e avise o dono para levar ao claude-kit; se não, desfaça com \`criar.mjs --atualizar\``));
+			if (sumidas.length) achados.push(erro(`peça(s) da fábrica apagada(s): ${sumidas.join(', ')}. Traga de volta com \`criar.mjs --atualizar\``));
 			return achados;
 		},
 	},
