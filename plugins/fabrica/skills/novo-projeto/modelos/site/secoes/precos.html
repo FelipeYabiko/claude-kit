@@ -1,0 +1,115 @@
+<!-- PREÇOS
+     Quando usar: o dono tem pacotes ou planos fixos e mostrar o preço ajuda a vender (filtra quem não pode pagar).
+     Quando NÃO usar: preço sob consulta ou que muda muito. Nesse caso, ponha "a partir de R$ ..." nas Perguntas.
+     Regras: no máximo 3 planos; um só em destaque (o que o dono quer vender mais); cada item da lista é um benefício. -->
+
+<section class="secao" id="precos">
+	<div class="conteudo">
+		<header class="secao__cabeca">
+			<p class="sobretitulo revelar">Preços</p>
+			<h2 class="secao__titulo revelar" data-exemplo>Escolha o tamanho do começo</h2>
+		</header>
+		<ul class="planos">
+			<li class="plano revelar">
+				<h3 data-exemplo>Um vídeo</h3>
+				<p class="plano__preco"><span data-exemplo>R$ 600</span></p>
+				<ul class="plano__itens">
+					<li data-exemplo>1 vídeo de até 60 segundos</li>
+					<li data-exemplo>Roteiro e legenda</li>
+					<li data-exemplo>2 rodadas de ajuste</li>
+				</ul>
+				<a class="botao botao--vazado" href="#contato" data-exemplo>Quero este</a>
+			</li>
+			<li class="plano plano--destaque revelar">
+				<p class="plano__selo" data-exemplo>Mais pedido</p>
+				<h3 data-exemplo>Pacote mensal</h3>
+				<p class="plano__preco"><span data-exemplo>R$ 1.900</span> <small data-exemplo>por mês</small></p>
+				<ul class="plano__itens">
+					<li data-exemplo>4 vídeos por mês</li>
+					<li data-exemplo>Calendário de postagens</li>
+					<li data-exemplo>Capas para todas as redes</li>
+				</ul>
+				<a class="botao" href="#contato" data-exemplo>Quero este</a>
+			</li>
+			<li class="plano revelar">
+				<h3 data-exemplo>Sob medida</h3>
+				<p class="plano__preco"><span data-exemplo>A combinar</span></p>
+				<ul class="plano__itens">
+					<li data-exemplo>Vídeo explicativo ou série</li>
+					<li data-exemplo>Animação de marca</li>
+					<li data-exemplo>Orçamento em 1 dia útil</li>
+				</ul>
+				<a class="botao botao--vazado" href="#contato" data-exemplo>Pedir orçamento</a>
+			</li>
+		</ul>
+	</div>
+</section>
+
+<style>
+/* ---------- Preços ---------- */
+
+.planos {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+	align-items: stretch;
+	gap: var(--esp-4);
+}
+
+.plano {
+	position: relative;
+	display: grid;
+	grid-template-rows: auto auto 1fr auto;
+	gap: var(--esp-4);
+	padding: var(--esp-6);
+	border: 1px solid var(--cor-borda);
+	border-radius: var(--raio-m);
+	background: var(--cor-superficie);
+}
+
+.plano--destaque {
+	border: 2px solid var(--cor-destaque);
+	box-shadow: var(--sombra-2);
+}
+
+.plano__selo {
+	position: absolute;
+	top: 0;
+	left: var(--esp-6);
+	transform: translateY(-50%);
+	padding: 0.25em 0.8em;
+	border-radius: var(--raio-botao);
+	background: var(--cor-destaque);
+	color: var(--cor-sobre-destaque);
+	font-size: var(--tam-0);
+	font-weight: 650;
+}
+
+.plano h3 {
+	font-size: var(--tam-3);
+}
+
+.plano__preco span {
+	font-family: var(--fonte-titulo);
+	font-size: var(--tam-5);
+	font-weight: var(--peso-titulo);
+	letter-spacing: var(--aperto-titulo);
+	line-height: 1;
+}
+
+.plano__preco small {
+	font-size: var(--tam-1);
+	color: var(--cor-texto-suave);
+}
+
+.plano__itens {
+	display: grid;
+	align-content: start;
+	gap: var(--esp-2);
+	color: var(--cor-texto-suave);
+}
+
+.plano__itens li {
+	padding-left: 1.5em;
+	background: linear-gradient(var(--cor-destaque), var(--cor-destaque)) 0 0.72em / 0.7em 2px no-repeat;
+}
+</style>

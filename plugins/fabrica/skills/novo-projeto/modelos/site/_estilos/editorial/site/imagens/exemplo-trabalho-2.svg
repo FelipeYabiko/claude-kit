@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" width="960" height="720" role="img" aria-label="Imagem de exemplo">
+<rect width="960" height="720" fill="#e4d7bd"/>
+<path d="M0 503.99999999999994 Q 240 216 480 396.00000000000006 T 960 251.99999999999997 V 720 H 0 Z" fill="#b23a17"/><circle cx="748.8000000000001" cy="158.4" r="79.2" fill="#1f1a14"/><path d="M0 590.4 Q 288 396.00000000000006 576 540 T 960 446.4 V 720 H 0 Z" fill="#1f1a14" opacity=".85"/>
+<text x="480" y="686" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="3" fill="#5a5145">IMAGEM DE EXEMPLO · TROQUE PELA SUA</text>
+</svg>

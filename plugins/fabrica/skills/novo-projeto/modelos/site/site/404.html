@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Página não encontrada · {{NOME}}</title>
+	<meta name="robots" content="noindex">
+	<link rel="icon" href="imagens/icone.svg" type="image/svg+xml">
+	<link rel="stylesheet" href="estilo/tokens.css">
+	<link rel="stylesheet" href="estilo/base.css">
+	<link rel="stylesheet" href="estilo/secoes.css">
+	<link rel="stylesheet" href="estilo/toque.css">
+	<script>
+		try {
+			var tema = localStorage.getItem('tema');
+			if (tema === 'claro' || tema === 'escuro') document.documentElement.dataset.tema = tema;
+		} catch (e) {}
+	</script>
+</head>
+<body>
+	<main class="secao chamada" id="conteudo">
+		<div class="conteudo chamada__miolo">
+			<p class="sobretitulo">Erro 404</p>
+			<h1 class="chamada__titulo">Esta página <em>não existe</em>.</h1>
+			<p class="chamada__apoio">O endereço pode ter mudado ou sido digitado errado. O começo do site continua no mesmo lugar.</p>
+			<div class="chamada__acoes">
+				<a class="botao botao--grande" href="index.html">Ir para o início</a>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

@@ -1,0 +1,253 @@
+/* Base: o que vale para a página toda (zerar o navegador, texto, botões, larguras e utilitários).
+   Cor, fonte, raio, sombra e espaço NUNCA são escritos aqui: vêm de tokens.css. Mudou a marca, muda só lá. */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	scroll-behavior: smooth;
+	/* o topo é fixo: sem isto o título da seção fica escondido atrás dele ao clicar no menu */
+	scroll-padding-top: 5.5rem;
+}
+
+body {
+	margin: 0;
+	background: var(--cor-fundo);
+	color: var(--cor-texto);
+	font-family: var(--fonte-texto);
+	font-size: var(--tam-2);
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd,
+figure,
+blockquote {
+	margin: 0;
+}
+
+ul,
+ol {
+	padding: 0;
+	list-style: none;
+}
+
+h1,
+h2,
+h3 {
+	font-family: var(--fonte-titulo);
+	font-weight: var(--peso-titulo);
+	letter-spacing: var(--aperto-titulo);
+	line-height: 1.08;
+	text-wrap: balance;
+}
+
+p {
+	text-wrap: pretty;
+}
+
+img,
+svg,
+video {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	color: var(--cor-destaque-texto);
+	text-underline-offset: 0.2em;
+	text-decoration-thickness: 0.08em;
+}
+
+a:hover {
+	text-decoration-thickness: 0.14em;
+}
+
+button {
+	font: inherit;
+	color: inherit;
+}
+
+/* Foco sempre visível para quem navega pelo teclado */
+:focus-visible {
+	outline: 3px solid var(--cor-destaque);
+	outline-offset: 3px;
+	border-radius: var(--raio-p);
+}
+
+::selection {
+	background: var(--cor-destaque);
+	color: var(--cor-sobre-destaque);
+}
+
+/* ---------- Larguras ---------- */
+
+.conteudo {
+	width: min(100% - 2 * var(--margem), var(--largura));
+	margin-inline: auto;
+}
+
+.conteudo--estreito {
+	width: min(100% - 2 * var(--margem), 46rem);
+}
+
+/* ---------- Texto ---------- */
+
+.sobretitulo {
+	font-family: var(--fonte-detalhe);
+	font-size: var(--tam-0);
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--cor-destaque-texto);
+}
+
+/* ---------- Botões ---------- */
+
+.botao {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5em;
+	min-height: 3rem;
+	padding: 0.7em 1.4em;
+	border: 2px solid var(--cor-destaque);
+	border-radius: var(--raio-botao);
+	background: var(--cor-destaque);
+	color: var(--cor-sobre-destaque);
+	font-family: var(--fonte-texto);
+	font-size: var(--tam-1);
+	font-weight: 650;
+	line-height: 1.2;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	transition:
+		transform var(--tempo-1) var(--curva),
+		box-shadow var(--tempo-1) var(--curva),
+		background-color var(--tempo-1) var(--curva);
+}
+
+.botao:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--sombra-2);
+}
+
+.botao:active {
+	transform: translateY(0);
+	box-shadow: none;
+}
+
+.botao--vazado {
+	background: transparent;
+	color: var(--cor-texto);
+	border-color: var(--cor-borda-forte);
+}
+
+.botao--vazado:hover {
+	border-color: var(--cor-texto);
+}
+
+.botao--pequeno {
+	min-height: 2.75rem;
+	padding: 0.45em 1.1em;
+}
+
+.botao--grande {
+	min-height: 3.5rem;
+	padding: 0.85em 1.8em;
+	font-size: var(--tam-2);
+}
+
+/* ---------- Acessibilidade ---------- */
+
+.pular {
+	position: absolute;
+	left: var(--margem);
+	top: -4rem;
+	z-index: 100;
+	padding: 0.6em 1em;
+	border-radius: var(--raio-p);
+	background: var(--cor-texto);
+	color: var(--cor-fundo);
+	font-weight: 600;
+}
+
+.pular:focus {
+	top: 0.75rem;
+}
+
+.so-leitor {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/* ---------- Entrada ao rolar ----------
+   Só esconde quando o JavaScript está ligado (classe com-js): sem ele, tudo aparece normalmente. */
+
+.com-js .revelar {
+	opacity: 0;
+	transform: translateY(1.25rem);
+	transition:
+		opacity var(--tempo-3) var(--curva),
+		transform var(--tempo-3) var(--curva);
+	transition-delay: calc(var(--ordem, 0) * 70ms);
+}
+
+.com-js .revelar.visivel {
+	opacity: 1;
+	transform: none;
+}
+
+/* Quem pediu menos movimento no aparelho não recebe animação nenhuma */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		transition-delay: 0ms !important;
+	}
+
+	.com-js .revelar {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@media print {
+	.topo,
+	.pular,
+	.chamada__acoes {
+		display: none;
+	}
+
+	.com-js .revelar {
+		opacity: 1;
+		transform: none;
+	}
+}

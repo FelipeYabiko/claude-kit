@@ -1,0 +1,87 @@
+/* O toque do estilo TÉCNICO: papel quadriculado, fonte de código nos detalhes e cantos marcados. Só usa tokens. */
+
+/* Quadriculado de fundo no topo, como papel de projeto */
+.heroi {
+	background-image:
+		linear-gradient(color-mix(in srgb, var(--cor-borda) 55%, transparent) 1px, transparent 1px),
+		linear-gradient(90deg, color-mix(in srgb, var(--cor-borda) 55%, transparent) 1px, transparent 1px);
+	background-size: 3rem 3rem;
+	background-position: center top;
+	border-bottom: 1px solid var(--cor-borda);
+}
+
+/* A palavra em destaque do título ganha a cor e um sublinhado reto */
+.heroi__titulo em,
+.chamada__titulo em,
+.secao__titulo em {
+	font-style: normal;
+	color: var(--cor-destaque-texto);
+	text-decoration: underline;
+	text-decoration-thickness: 0.07em;
+	text-underline-offset: 0.14em;
+}
+
+/* Sobretítulo com cara de comentário de código */
+.sobretitulo {
+	font-weight: 500;
+	letter-spacing: 0.06em;
+}
+
+.sobretitulo::before {
+	content: "// ";
+	color: var(--cor-texto-suave);
+}
+
+.prova {
+	border-top: 0;
+}
+
+.prova__lista dd {
+	font-family: var(--fonte-detalhe);
+	font-weight: 500;
+	letter-spacing: -0.04em;
+}
+
+.prova__lista dt {
+	font-family: var(--fonte-detalhe);
+	font-size: var(--tam-0);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+
+/* Cartões com um canto marcado na cor de destaque */
+.cartao {
+	position: relative;
+}
+
+.cartao::after {
+	content: "";
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	width: 1.25rem;
+	height: 1.25rem;
+	border-top: 2px solid var(--cor-destaque);
+	border-left: 2px solid var(--cor-destaque);
+	border-top-left-radius: var(--raio-m);
+}
+
+.galeria__item img {
+	border: 1px solid var(--cor-borda);
+}
+
+.galeria__legenda p {
+	font-family: var(--fonte-detalhe);
+	font-size: var(--tam-0);
+}
+
+.passo {
+	border-top-width: 1px;
+	border-top-color: var(--cor-borda-forte);
+}
+
+.depoimento {
+	text-align: left;
+	padding-left: var(--esp-6);
+	border-left: 2px solid var(--cor-destaque);
+}

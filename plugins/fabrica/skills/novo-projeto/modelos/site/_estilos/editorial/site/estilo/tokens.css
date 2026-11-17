@@ -1,0 +1,94 @@
+/* Tokens do estilo EDITORIAL: papel quente, serifa com personalidade, um vermelho-tijolo de destaque.
+   Este é o ÚNICO arquivo com cores, fontes, raios e sombras. Cada cor é light-dark(clara, escura), em #hex,
+   para o fiscal conferir o contraste dos dois temas. Trocar a marca = trocar os valores daqui. */
+
+@font-face {
+	font-family: "Fraunces";
+	src: url("../fontes/fraunces.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Fraunces";
+	src: url("../fontes/fraunces-italico.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Figtree";
+	src: url("../fontes/figtree.woff2") format("woff2");
+	font-weight: 300 900;
+	font-display: swap;
+}
+
+:root {
+	color-scheme: light dark;
+
+	/* ---------- Cores ---------- */
+	--cor-fundo: light-dark(#f7f2e8, #14110d);
+	--cor-superficie: light-dark(#fffdf8, #1e1a15);
+	--cor-realce: light-dark(#efe6d3, #1b1712);
+	--cor-texto: light-dark(#1f1a14, #f1e9da);
+	--cor-texto-suave: light-dark(#5a5145, #b8ac98);
+	--cor-borda: light-dark(#e0d6c3, #332d25);
+	--cor-borda-forte: light-dark(#b9ac94, #5a5044);
+	--cor-destaque: light-dark(#b23a17, #f08a5d);
+	--cor-sobre-destaque: light-dark(#fff8f0, #1d0f07);
+	--cor-destaque-texto: light-dark(#a33312, #f39a72);
+	--cor-sombra: light-dark(#3a2a14, #000000);
+
+	/* ---------- Fontes ---------- */
+	--fonte-titulo: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+	--fonte-texto: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+	--fonte-detalhe: "Figtree", system-ui, sans-serif;
+	--peso-titulo: 560;
+	--peso-citacao: 420;
+	--aperto-titulo: -0.022em;
+
+	/* ---------- Forma ---------- */
+	--raio-p: 4px;
+	--raio-m: 6px;
+	--raio-g: 8px;
+	--raio-botao: 999px;
+	--sombra-2: 0 10px 30px -12px color-mix(in srgb, var(--cor-sombra) 35%, transparent);
+	--sombra-3: 0 30px 60px -30px color-mix(in srgb, var(--cor-sombra) 50%, transparent);
+
+	/* ---------- Tamanhos de texto (crescem com a tela, do celular ao monitor) ---------- */
+	--tam-0: 0.8125rem;
+	--tam-1: 0.9375rem;
+	--tam-2: 1.0625rem;
+	--tam-3: clamp(1.15rem, 1.08rem + 0.4vw, 1.375rem);
+	--tam-4: clamp(1.4rem, 1.2rem + 1vw, 1.95rem);
+	--tam-5: clamp(2rem, 1.45rem + 2.6vw, 3.4rem);
+	--tam-6: clamp(2.55rem, 1.35rem + 5.6vw, 5.4rem);
+
+	/* ---------- Espaços ---------- */
+	--esp-1: 0.25rem;
+	--esp-2: 0.5rem;
+	--esp-3: 0.75rem;
+	--esp-4: 1rem;
+	--esp-5: 1.5rem;
+	--esp-6: 2rem;
+	--esp-secao: clamp(4rem, 2.8rem + 6vw, 8.5rem);
+	--margem: clamp(1.25rem, 0.6rem + 3vw, 3rem);
+	--largura: 74rem;
+
+	/* ---------- Movimento ---------- */
+	--tempo-1: 140ms;
+	--tempo-2: 240ms;
+	--tempo-3: 420ms;
+	--curva: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* A pessoa escolheu um tema no botão: ele vence o do aparelho */
+:root[data-tema="claro"] {
+	color-scheme: light;
+}
+
+:root[data-tema="escuro"] {
+	color-scheme: dark;
+}

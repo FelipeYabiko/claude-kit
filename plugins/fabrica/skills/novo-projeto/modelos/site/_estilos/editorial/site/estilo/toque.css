@@ -1,0 +1,71 @@
+/* O toque do estilo EDITORIAL: detalhes que dão cara de revista. Só usa tokens. */
+
+/* A palavra em destaque do título vira itálico de serifa, na cor de destaque */
+.heroi__titulo em,
+.chamada__titulo em,
+.secao__titulo em {
+	font-style: italic;
+	font-weight: 380;
+	color: var(--cor-destaque-texto);
+}
+
+/* Um traço antes do sobretítulo, como em capa de matéria */
+.sobretitulo {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.9em;
+}
+
+.sobretitulo::before {
+	content: "";
+	width: 2.25rem;
+	height: 1px;
+	background: currentColor;
+}
+
+/* A foto do topo ganha uma moldura deslocada */
+.heroi__imagem {
+	position: relative;
+}
+
+.heroi__imagem::before {
+	content: "";
+	position: absolute;
+	inset: 1.25rem -1.25rem -1.25rem 1.25rem;
+	border: 1px solid var(--cor-borda-forte);
+	border-radius: var(--raio-g);
+}
+
+.heroi__imagem img {
+	position: relative;
+}
+
+/* Cartões sem caixa: só uma linha em cima, como colunas de jornal */
+.cartao {
+	padding: var(--esp-5) 0 0;
+	border: 0;
+	border-top: 1px solid var(--cor-texto);
+	border-radius: 0;
+	background: transparent;
+}
+
+.cartao:hover {
+	transform: none;
+	box-shadow: none;
+	border-color: var(--cor-destaque);
+}
+
+/* Aspas grandes no depoimento */
+.depoimento::before {
+	content: "“";
+	font-family: var(--fonte-titulo);
+	font-size: 5rem;
+	line-height: 0.5;
+	color: var(--cor-destaque-texto);
+}
+
+@media (max-width: 52rem) {
+	.heroi__imagem::before {
+		inset: 0.75rem -0.5rem -0.75rem 0.75rem;
+	}
+}

@@ -1,0 +1,49 @@
+<!-- LOGOS DE CLIENTES
+     Quando usar: o dono já atendeu marcas que o público reconhece E tem autorização para mostrar o logo.
+     Quando NÃO usar: sem autorização (logo dos outros é marca registrada) ou só com clientes desconhecidos.
+     Regras: logos em uma cor só (SVG), todos da mesma altura; de 4 a 8; ficam logo abaixo do topo. -->
+
+<section class="logos" aria-label="Quem já contratou">
+	<div class="conteudo">
+		<p class="logos__titulo" data-exemplo>Quem já contratou</p>
+		<ul class="logos__lista">
+			<li><img src="imagens/logo-cliente-1.svg" alt="Nome do cliente 1" width="160" height="48" loading="lazy"></li>
+			<li><img src="imagens/logo-cliente-2.svg" alt="Nome do cliente 2" width="160" height="48" loading="lazy"></li>
+			<li><img src="imagens/logo-cliente-3.svg" alt="Nome do cliente 3" width="160" height="48" loading="lazy"></li>
+			<li><img src="imagens/logo-cliente-4.svg" alt="Nome do cliente 4" width="160" height="48" loading="lazy"></li>
+		</ul>
+	</div>
+</section>
+
+<style>
+/* ---------- Logos de clientes ---------- */
+
+.logos {
+	padding-block: var(--esp-6);
+	border-bottom: 1px solid var(--cor-borda);
+}
+
+.logos__titulo {
+	margin-bottom: var(--esp-4);
+	font-family: var(--fonte-detalhe);
+	font-size: var(--tam-0);
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	text-align: center;
+	color: var(--cor-texto-suave);
+}
+
+.logos__lista {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: var(--esp-5) clamp(1.5rem, 1rem + 3vw, 4rem);
+}
+
+.logos__lista img {
+	height: 2.25rem;
+	width: auto;
+	opacity: 0.75;
+}
+</style>

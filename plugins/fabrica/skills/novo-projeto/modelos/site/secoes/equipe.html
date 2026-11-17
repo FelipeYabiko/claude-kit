@@ -1,0 +1,62 @@
+<!-- EQUIPE
+     Quando usar: o cliente compra a pessoa (consultoria, estúdio pequeno, aula, saúde). Rosto de verdade dá confiança.
+     Quando NÃO usar: sem fotos boas de todos (foto ruim piora) ou equipe que muda toda hora.
+     Regras: fotos no mesmo enquadramento e luz; papel em uma linha; no máximo 6 pessoas na página inicial. -->
+
+<section class="secao" id="equipe">
+	<div class="conteudo">
+		<header class="secao__cabeca">
+			<p class="sobretitulo revelar">Quem faz</p>
+			<h2 class="secao__titulo revelar" data-exemplo>Gente de verdade do outro lado</h2>
+		</header>
+		<ul class="equipe">
+			<li class="pessoa revelar">
+				<img src="imagens/exemplo-trabalho-4.svg" alt="Imagem de exemplo: troque pelo retrato da pessoa" width="960" height="720" loading="lazy">
+				<h3 data-exemplo>Ana Lima</h3>
+				<p data-exemplo>Roteiro e direção</p>
+			</li>
+			<li class="pessoa revelar">
+				<img src="imagens/exemplo-trabalho-1.svg" alt="Imagem de exemplo: troque pelo retrato da pessoa" width="960" height="720" loading="lazy">
+				<h3 data-exemplo>Bruno Reis</h3>
+				<p data-exemplo>Animação</p>
+			</li>
+			<li class="pessoa revelar">
+				<img src="imagens/exemplo-trabalho-3.svg" alt="Imagem de exemplo: troque pelo retrato da pessoa" width="960" height="720" loading="lazy">
+				<h3 data-exemplo>Carla Dias</h3>
+				<p data-exemplo>Edição e som</p>
+			</li>
+		</ul>
+	</div>
+</section>
+
+<style>
+/* ---------- Equipe ---------- */
+
+.equipe {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+	gap: var(--esp-6) var(--esp-5);
+}
+
+.pessoa {
+	display: grid;
+	gap: var(--esp-1);
+}
+
+.pessoa img {
+	width: 100%;
+	aspect-ratio: 4 / 5;
+	object-fit: cover;
+	margin-bottom: var(--esp-3);
+	border-radius: var(--raio-m);
+}
+
+.pessoa h3 {
+	font-size: var(--tam-3);
+}
+
+.pessoa p {
+	font-size: var(--tam-1);
+	color: var(--cor-texto-suave);
+}
+</style>

@@ -1,0 +1,85 @@
+/* Tokens do estilo TÉCNICO: cinza frio, azul preciso, cantos retos e detalhes em fonte de código.
+   Este é o ÚNICO arquivo com cores, fontes, raios e sombras. Cada cor é light-dark(clara, escura), em #hex,
+   para o fiscal conferir o contraste dos dois temas. Trocar a marca = trocar os valores daqui. */
+
+@font-face {
+	font-family: "Space Grotesk";
+	src: url("../fontes/space-grotesk.woff2") format("woff2");
+	font-weight: 300 700;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "JetBrains Mono";
+	src: url("../fontes/jetbrains-mono.woff2") format("woff2");
+	font-weight: 100 800;
+	font-display: swap;
+}
+
+:root {
+	color-scheme: light dark;
+
+	/* ---------- Cores ---------- */
+	--cor-fundo: light-dark(#f4f6f8, #0b0f14);
+	--cor-superficie: light-dark(#ffffff, #121821);
+	--cor-realce: light-dark(#e9eef4, #0f151d);
+	--cor-texto: light-dark(#0e1620, #e6edf5);
+	--cor-texto-suave: light-dark(#4a5868, #93a1b2);
+	--cor-borda: light-dark(#d9e0e7, #222c38);
+	--cor-borda-forte: light-dark(#9aa8b8, #3d4b5c);
+	--cor-destaque: light-dark(#0b5fff, #4d8dff);
+	--cor-sobre-destaque: light-dark(#ffffff, #06101f);
+	--cor-destaque-texto: light-dark(#0a50d6, #7aa9ff);
+	--cor-sombra: light-dark(#0e1620, #000000);
+
+	/* ---------- Fontes ---------- */
+	--fonte-titulo: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+	--fonte-texto: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+	--fonte-detalhe: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+	--peso-titulo: 600;
+	--peso-citacao: 500;
+	--aperto-titulo: -0.03em;
+
+	/* ---------- Forma ---------- */
+	--raio-p: 2px;
+	--raio-m: 4px;
+	--raio-g: 6px;
+	--raio-botao: 4px;
+	--sombra-2: 0 8px 24px -10px color-mix(in srgb, var(--cor-sombra) 30%, transparent);
+	--sombra-3: 0 24px 48px -24px color-mix(in srgb, var(--cor-sombra) 45%, transparent);
+
+	/* ---------- Tamanhos de texto (crescem com a tela, do celular ao monitor) ---------- */
+	--tam-0: 0.8125rem;
+	--tam-1: 0.9375rem;
+	--tam-2: 1.0625rem;
+	--tam-3: clamp(1.15rem, 1.08rem + 0.4vw, 1.375rem);
+	--tam-4: clamp(1.4rem, 1.2rem + 1vw, 1.95rem);
+	--tam-5: clamp(2rem, 1.45rem + 2.6vw, 3.4rem);
+	--tam-6: clamp(2.55rem, 1.35rem + 5.6vw, 5rem);
+
+	/* ---------- Espaços ---------- */
+	--esp-1: 0.25rem;
+	--esp-2: 0.5rem;
+	--esp-3: 0.75rem;
+	--esp-4: 1rem;
+	--esp-5: 1.5rem;
+	--esp-6: 2rem;
+	--esp-secao: clamp(4rem, 2.8rem + 6vw, 8.5rem);
+	--margem: clamp(1.25rem, 0.6rem + 3vw, 3rem);
+	--largura: 74rem;
+
+	/* ---------- Movimento ---------- */
+	--tempo-1: 140ms;
+	--tempo-2: 240ms;
+	--tempo-3: 420ms;
+	--curva: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* A pessoa escolheu um tema no botão: ele vence o do aparelho */
+:root[data-tema="claro"] {
+	color-scheme: light;
+}
+
+:root[data-tema="escuro"] {
+	color-scheme: dark;
+}

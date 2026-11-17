@@ -1,0 +1,73 @@
+<!-- VÍDEO EM DESTAQUE
+     Quando usar: existe um vídeo que explica ou prova melhor do que texto (demonstração, depoimento, portfólio).
+     Arquivo próprio: ponha o .mp4 em site/videos/ com menos de 15 MB (H.264, 1080p ou menos) e uma imagem de capa.
+     Nunca toca sozinho com som. `preload="none"` faz o vídeo só baixar quando a pessoa aperta o play.
+     YouTube: troque a tag <video> pelo bloco comentado mais abaixo (só carrega o YouTube depois do clique). -->
+
+<section class="secao secao--realce" id="video">
+	<div class="conteudo">
+		<header class="secao__cabeca">
+			<p class="sobretitulo revelar">Em vídeo</p>
+			<h2 class="secao__titulo revelar" data-exemplo>Veja em um minuto</h2>
+		</header>
+		<figure class="video revelar">
+			<video controls preload="none" playsinline poster="imagens/exemplo-trabalho-2.svg" width="1920" height="1080" aria-label="Vídeo de apresentação">
+				<source src="videos/apresentacao.mp4" type="video/mp4">
+			</video>
+			<figcaption data-exemplo>Como foi o projeto da Clínica Horizonte, do roteiro à tela da sala de espera.</figcaption>
+		</figure>
+		<!-- Versão YouTube (troque ID_DO_VIDEO; a capa é uma imagem sua, e o YouTube só carrega no clique):
+		<figure class="video revelar">
+			<a class="video__capa" href="https://www.youtube.com/watch?v=ID_DO_VIDEO" aria-label="Assistir ao vídeo no YouTube">
+				<img src="imagens/capa-do-video.jpg" alt="Capa do vídeo: descreva a cena" width="1920" height="1080" loading="lazy">
+			</a>
+		</figure> -->
+	</div>
+</section>
+
+<style>
+/* ---------- Vídeo ---------- */
+
+.video {
+	display: grid;
+	gap: var(--esp-3);
+	max-width: 60rem;
+	margin-inline: auto;
+}
+
+.video video,
+.video__capa img {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	border-radius: var(--raio-g);
+	background: var(--cor-superficie);
+	box-shadow: var(--sombra-3);
+}
+
+.video__capa {
+	position: relative;
+	display: block;
+}
+
+/* Triângulo de "tocar" desenhado em CSS no meio da capa */
+.video__capa::after {
+	content: "";
+	position: absolute;
+	inset: 50% auto auto 50%;
+	width: 4.5rem;
+	height: 4.5rem;
+	transform: translate(-50%, -50%);
+	border-radius: 50%;
+	background:
+		conic-gradient(from 240deg at 62% 50%, var(--cor-sobre-destaque) 60deg, transparent 0) 54% 50% / 34% 40% no-repeat,
+		var(--cor-destaque);
+	box-shadow: var(--sombra-2);
+}
+
+.video figcaption {
+	font-size: var(--tam-1);
+	color: var(--cor-texto-suave);
+	text-align: center;
+}
+</style>

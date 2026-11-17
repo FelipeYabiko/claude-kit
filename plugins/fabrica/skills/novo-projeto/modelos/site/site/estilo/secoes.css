@@ -1,0 +1,534 @@
+/* Seções: o desenho de cada bloco da página. Mesma regra do base.css: nada de cor, fonte ou raio escritos aqui,
+   só os tokens. Seção nova: copie de secoes/ (a biblioteca) e traga o CSS dela para o fim deste arquivo. */
+
+/* ---------- Topo ---------- */
+
+.topo {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	background: color-mix(in srgb, var(--cor-fundo) 86%, transparent);
+	backdrop-filter: blur(14px) saturate(1.4);
+	-webkit-backdrop-filter: blur(14px) saturate(1.4);
+	border-bottom: 1px solid color-mix(in srgb, var(--cor-borda) 70%, transparent);
+}
+
+.topo__linha {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--esp-4);
+	min-height: 4.5rem;
+}
+
+.marca {
+	display: inline-flex;
+	align-items: center;
+	min-height: 2.75rem;
+	font-family: var(--fonte-titulo);
+	font-size: var(--tam-3);
+	font-weight: var(--peso-titulo);
+	letter-spacing: var(--aperto-titulo);
+	color: var(--cor-texto);
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.topo__nav {
+	display: flex;
+	align-items: center;
+	gap: var(--esp-2);
+}
+
+.topo__nav > a:not(.botao) {
+	display: inline-flex;
+	align-items: center;
+	min-height: 2.75rem;
+	padding-inline: var(--esp-3);
+	border-radius: var(--raio-p);
+	color: var(--cor-texto);
+	font-size: var(--tam-1);
+	font-weight: 500;
+	text-decoration: none;
+	transition: background-color var(--tempo-1) var(--curva);
+}
+
+.topo__nav > a:not(.botao):hover {
+	background: var(--cor-realce);
+}
+
+.topo__menu {
+	display: none;
+	min-height: 2.75rem;
+	padding-inline: var(--esp-4);
+	border: 1px solid var(--cor-borda-forte);
+	border-radius: var(--raio-botao);
+	background: transparent;
+	font-size: var(--tam-1);
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.topo__tema {
+	display: inline-grid;
+	place-items: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	border: 0;
+	border-radius: 50%;
+	background: transparent;
+	cursor: pointer;
+	transition: background-color var(--tempo-1) var(--curva);
+}
+
+.topo__tema:hover {
+	background: var(--cor-realce);
+}
+
+/* Meia-lua desenhada só com CSS: não precisa de arquivo de ícone */
+.topo__tema-icone {
+	width: 1.15rem;
+	height: 1.15rem;
+	border-radius: 50%;
+	border: 2px solid var(--cor-texto);
+	background: linear-gradient(90deg, var(--cor-texto) 50%, transparent 50%);
+}
+
+@media (max-width: 52rem) {
+	.topo__menu {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.topo__nav {
+		position: absolute;
+		inset: 100% 0 auto 0;
+		flex-direction: column;
+		align-items: stretch;
+		gap: var(--esp-1);
+		padding: var(--esp-3) var(--margem) var(--esp-5);
+		background: var(--cor-fundo);
+		border-bottom: 1px solid var(--cor-borda);
+		box-shadow: var(--sombra-2);
+	}
+
+	.com-js .topo__nav {
+		display: none;
+	}
+
+	.com-js .topo__nav.aberto {
+		display: flex;
+	}
+
+	.topo__nav > a:not(.botao) {
+		min-height: 3rem;
+		font-size: var(--tam-2);
+	}
+
+	.topo__nav .botao {
+		margin-top: var(--esp-2);
+	}
+
+	.topo__tema {
+		align-self: flex-start;
+	}
+}
+
+/* ---------- Herói ---------- */
+
+.heroi {
+	padding-block: clamp(3rem, 2rem + 5vw, 6.5rem) var(--esp-secao);
+}
+
+.heroi__grade {
+	display: grid;
+	grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+	align-items: center;
+	gap: clamp(2rem, 1rem + 4vw, 5rem);
+}
+
+.heroi__texto {
+	display: grid;
+	gap: var(--esp-5);
+	justify-items: start;
+}
+
+.heroi__titulo {
+	font-size: var(--tam-6);
+	line-height: 1;
+}
+
+.heroi__apoio {
+	max-width: 34rem;
+	font-size: var(--tam-3);
+	line-height: 1.5;
+	color: var(--cor-texto-suave);
+}
+
+.heroi__acoes {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--esp-3);
+	margin-top: var(--esp-2);
+}
+
+.heroi__imagem img {
+	width: 100%;
+	aspect-ratio: 6 / 7;
+	object-fit: cover;
+	border-radius: var(--raio-g);
+	box-shadow: var(--sombra-3);
+}
+
+@media (max-width: 52rem) {
+	.heroi__grade {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.heroi__imagem img {
+		aspect-ratio: 4 / 3;
+	}
+}
+
+/* ---------- Prova (números) ---------- */
+
+.prova {
+	border-block: 1px solid var(--cor-borda);
+}
+
+.prova__lista {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.prova__lista > div {
+	display: flex;
+	flex-direction: column-reverse;
+	gap: var(--esp-1);
+	padding: var(--esp-6) var(--esp-5);
+}
+
+.prova__lista > div + div {
+	border-left: 1px solid var(--cor-borda);
+}
+
+.prova__lista dd {
+	font-family: var(--fonte-titulo);
+	font-size: var(--tam-5);
+	font-weight: var(--peso-titulo);
+	letter-spacing: var(--aperto-titulo);
+	line-height: 1;
+}
+
+.prova__lista dt {
+	font-size: var(--tam-1);
+	color: var(--cor-texto-suave);
+}
+
+@media (max-width: 40rem) {
+	.prova__lista {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.prova__lista > div {
+		padding: var(--esp-5) 0;
+	}
+
+	.prova__lista > div + div {
+		border-left: 0;
+		border-top: 1px solid var(--cor-borda);
+	}
+}
+
+/* ---------- Seção genérica ---------- */
+
+.secao {
+	padding-block: var(--esp-secao);
+}
+
+.secao--realce {
+	background: var(--cor-realce);
+}
+
+.secao--estreita {
+	padding-block: calc(var(--esp-secao) * 0.75);
+}
+
+.secao__cabeca {
+	display: grid;
+	gap: var(--esp-3);
+	max-width: 44rem;
+	margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+}
+
+.secao__titulo {
+	font-size: var(--tam-5);
+}
+
+/* ---------- Cartões (serviços) ---------- */
+
+.cartoes {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+	gap: var(--esp-4);
+}
+
+.cartao {
+	display: grid;
+	align-content: start;
+	gap: var(--esp-3);
+	padding: var(--esp-6);
+	border: 1px solid var(--cor-borda);
+	border-radius: var(--raio-m);
+	background: var(--cor-superficie);
+	transition:
+		transform var(--tempo-2) var(--curva),
+		box-shadow var(--tempo-2) var(--curva),
+		border-color var(--tempo-2) var(--curva);
+}
+
+.cartao:hover {
+	transform: translateY(-4px);
+	border-color: var(--cor-borda-forte);
+	box-shadow: var(--sombra-2);
+}
+
+.cartao__numero {
+	font-family: var(--fonte-detalhe);
+	font-size: var(--tam-0);
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	color: var(--cor-destaque-texto);
+}
+
+.cartao h3 {
+	font-size: var(--tam-4);
+}
+
+.cartao p {
+	color: var(--cor-texto-suave);
+}
+
+/* ---------- Galeria (trabalhos) ---------- */
+
+.galeria {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: clamp(1.25rem, 1rem + 1.5vw, 2.5rem);
+}
+
+.galeria__item img {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	border-radius: var(--raio-m);
+	transition: transform var(--tempo-3) var(--curva);
+}
+
+.galeria__item:hover img {
+	transform: scale(1.015);
+}
+
+.galeria__legenda {
+	display: grid;
+	gap: var(--esp-1);
+	padding-top: var(--esp-4);
+}
+
+.galeria__legenda h3 {
+	font-size: var(--tam-3);
+}
+
+.galeria__legenda p {
+	font-size: var(--tam-1);
+	color: var(--cor-texto-suave);
+}
+
+@media (max-width: 40rem) {
+	.galeria {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+/* ---------- Passos (como funciona) ---------- */
+
+.passos {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+	gap: var(--esp-6);
+	counter-reset: passo;
+}
+
+.passo {
+	display: grid;
+	align-content: start;
+	gap: var(--esp-3);
+	padding-top: var(--esp-5);
+	border-top: 2px solid var(--cor-texto);
+	counter-increment: passo;
+}
+
+.passo::before {
+	content: counter(passo, decimal-leading-zero);
+	font-family: var(--fonte-detalhe);
+	font-size: var(--tam-0);
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	color: var(--cor-destaque-texto);
+}
+
+.passo h3 {
+	font-size: var(--tam-4);
+}
+
+.passo p {
+	color: var(--cor-texto-suave);
+}
+
+/* ---------- Depoimento ---------- */
+
+.depoimento {
+	display: grid;
+	gap: var(--esp-5);
+	max-width: 54rem;
+	margin-inline: auto;
+	text-align: center;
+}
+
+.depoimento blockquote {
+	font-family: var(--fonte-titulo);
+	font-size: var(--tam-4);
+	font-weight: var(--peso-citacao);
+	letter-spacing: var(--aperto-titulo);
+	line-height: 1.3;
+	text-wrap: balance;
+}
+
+.depoimento figcaption {
+	font-size: var(--tam-1);
+	color: var(--cor-texto-suave);
+}
+
+.depoimento figcaption strong {
+	color: var(--cor-texto);
+}
+
+.depoimento figcaption strong::after {
+	content: " · ";
+	font-weight: 400;
+}
+
+/* ---------- Perguntas ---------- */
+
+.perguntas {
+	border-top: 1px solid var(--cor-borda-forte);
+}
+
+.pergunta {
+	border-bottom: 1px solid var(--cor-borda-forte);
+}
+
+.pergunta summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--esp-4);
+	min-height: 4rem;
+	padding-block: var(--esp-4);
+	font-family: var(--fonte-titulo);
+	font-size: var(--tam-3);
+	font-weight: var(--peso-titulo);
+	letter-spacing: var(--aperto-titulo);
+	cursor: pointer;
+	list-style: none;
+}
+
+.pergunta summary::-webkit-details-marker {
+	display: none;
+}
+
+/* O "+" que vira "−": duas barrinhas, uma gira ao abrir */
+.pergunta summary::after {
+	content: "";
+	flex: none;
+	width: 1rem;
+	height: 1rem;
+	background:
+		linear-gradient(var(--cor-texto), var(--cor-texto)) center / 100% 2px no-repeat,
+		linear-gradient(var(--cor-texto), var(--cor-texto)) center / 2px 100% no-repeat;
+	transition: transform var(--tempo-2) var(--curva);
+}
+
+.pergunta[open] summary::after {
+	transform: rotate(45deg);
+}
+
+.pergunta p {
+	max-width: 38rem;
+	padding-bottom: var(--esp-5);
+	color: var(--cor-texto-suave);
+}
+
+/* ---------- Chamada final (contato) ---------- */
+
+.chamada__miolo {
+	display: grid;
+	justify-items: center;
+	gap: var(--esp-5);
+	text-align: center;
+}
+
+.chamada__titulo {
+	max-width: 18ch;
+	font-size: var(--tam-6);
+	line-height: 1;
+}
+
+.chamada__apoio {
+	max-width: 30rem;
+	font-size: var(--tam-3);
+	color: var(--cor-texto-suave);
+}
+
+.chamada__acoes {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--esp-3);
+	margin-top: var(--esp-3);
+}
+
+/* ---------- Rodapé ---------- */
+
+.rodape {
+	padding-block: var(--esp-6);
+	border-top: 1px solid var(--cor-borda);
+	font-size: var(--tam-1);
+	color: var(--cor-texto-suave);
+}
+
+.rodape__linha {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--esp-3) var(--esp-5);
+}
+
+.rodape__links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--esp-1) var(--esp-2);
+}
+
+.rodape__links a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 2.75rem;
+	padding-inline: var(--esp-2);
+	color: var(--cor-texto-suave);
+}
+
+.rodape__links a:hover {
+	color: var(--cor-texto);
+}

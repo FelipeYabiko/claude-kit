@@ -1,0 +1,103 @@
+/* O toque do estilo VIBRANTE: marca-texto, adesivos e sombra dura. Só usa tokens. */
+
+/* A palavra em destaque do título recebe um marca-texto */
+.heroi__titulo em,
+.chamada__titulo em,
+.secao__titulo em {
+	font-style: normal;
+	padding: 0 0.12em;
+	border-radius: 0.18em;
+	background: var(--cor-vivo);
+	color: var(--cor-sobre-vivo);
+	box-decoration-break: clone;
+	-webkit-box-decoration-break: clone;
+}
+
+/* Sobretítulo vira etiqueta */
+.sobretitulo {
+	display: inline-block;
+	width: fit-content;
+	justify-self: start;
+	padding: 0.45em 0.9em;
+	border: 2px solid var(--cor-borda-forte);
+	border-radius: 999px;
+	color: var(--cor-texto);
+	letter-spacing: 0.08em;
+}
+
+/* A foto do topo fica levemente torta, com sombra dura na cor de destaque */
+.heroi__imagem img {
+	border: 2px solid var(--cor-borda-forte);
+	transform: rotate(2deg);
+}
+
+/* Cartões e botões: borda grossa e sombra sem desfoque */
+.cartao {
+	border: 2px solid var(--cor-borda-forte);
+	box-shadow: var(--sombra-2);
+}
+
+.cartao:hover {
+	transform: translate(-3px, -3px);
+	box-shadow: 8px 8px 0 var(--cor-destaque);
+}
+
+.cartao__numero {
+	display: inline-grid;
+	place-items: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	background: var(--cor-vivo);
+	color: var(--cor-sobre-vivo);
+	letter-spacing: 0;
+}
+
+.botao {
+	border-color: var(--cor-borda-forte);
+	box-shadow: 4px 4px 0 var(--cor-borda-forte);
+}
+
+.botao:hover {
+	transform: translate(-2px, -2px);
+	box-shadow: 6px 6px 0 var(--cor-borda-forte);
+}
+
+.botao:active {
+	transform: translate(2px, 2px);
+	box-shadow: 0 0 0 var(--cor-borda-forte);
+}
+
+.botao--vazado {
+	background: var(--cor-superficie);
+}
+
+.botao--pequeno {
+	box-shadow: 3px 3px 0 var(--cor-borda-forte);
+}
+
+.galeria__item img {
+	border: 2px solid var(--cor-borda-forte);
+}
+
+.passo {
+	border-top-width: 4px;
+}
+
+.prova {
+	border-block: 2px solid var(--cor-borda-forte);
+}
+
+.prova__lista > div + div {
+	border-color: var(--cor-borda-forte);
+}
+
+.prova__lista dd {
+	color: var(--cor-destaque-texto);
+}
+
+@media (max-width: 52rem) {
+	.heroi__imagem img {
+		transform: rotate(1deg);
+	}
+}

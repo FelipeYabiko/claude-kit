@@ -1,0 +1,87 @@
+/* Tokens do estilo VIBRANTE: branco limpo, roxo elétrico e verde-limão, formas redondas e sombra dura.
+   Este é o ÚNICO arquivo com cores, fontes, raios e sombras. Cada cor é light-dark(clara, escura), em #hex,
+   para o fiscal conferir o contraste dos dois temas. Trocar a marca = trocar os valores daqui. */
+
+@font-face {
+	font-family: "Bricolage Grotesque";
+	src: url("../fontes/bricolage-grotesque.woff2") format("woff2");
+	font-weight: 200 800;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Instrument Sans";
+	src: url("../fontes/instrument-sans.woff2") format("woff2");
+	font-weight: 400 700;
+	font-display: swap;
+}
+
+:root {
+	color-scheme: light dark;
+
+	/* ---------- Cores ---------- */
+	--cor-fundo: light-dark(#fbfaf6, #0f0e13);
+	--cor-superficie: light-dark(#ffffff, #1a1822);
+	--cor-realce: light-dark(#f0ebff, #171521);
+	--cor-texto: light-dark(#131118, #f4f2fb);
+	--cor-texto-suave: light-dark(#55516a, #aaa5c0);
+	--cor-borda: light-dark(#e4e1ee, #2c2937);
+	--cor-borda-forte: light-dark(#131118, #f4f2fb);
+	--cor-destaque: light-dark(#5a2bf0, #b8f24a);
+	--cor-sobre-destaque: light-dark(#ffffff, #141c00);
+	--cor-destaque-texto: light-dark(#4f22e0, #c5f76a);
+	--cor-vivo: light-dark(#c8f751, #6d4dff);
+	--cor-sobre-vivo: light-dark(#141c00, #ffffff);
+	--cor-sombra: light-dark(#131118, #000000);
+
+	/* ---------- Fontes ---------- */
+	--fonte-titulo: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+	--fonte-texto: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+	--fonte-detalhe: "Instrument Sans", system-ui, sans-serif;
+	--peso-titulo: 750;
+	--peso-citacao: 600;
+	--aperto-titulo: -0.035em;
+
+	/* ---------- Forma ---------- */
+	--raio-p: 10px;
+	--raio-m: 22px;
+	--raio-g: 32px;
+	--raio-botao: 999px;
+	--sombra-2: 5px 5px 0 var(--cor-borda-forte);
+	--sombra-3: 10px 10px 0 var(--cor-destaque);
+
+	/* ---------- Tamanhos de texto (crescem com a tela, do celular ao monitor) ---------- */
+	--tam-0: 0.8125rem;
+	--tam-1: 0.9375rem;
+	--tam-2: 1.0625rem;
+	--tam-3: clamp(1.15rem, 1.08rem + 0.4vw, 1.375rem);
+	--tam-4: clamp(1.4rem, 1.2rem + 1vw, 1.95rem);
+	--tam-5: clamp(2rem, 1.45rem + 2.6vw, 3.4rem);
+	--tam-6: clamp(2.55rem, 1.35rem + 5.6vw, 6rem);
+
+	/* ---------- Espaços ---------- */
+	--esp-1: 0.25rem;
+	--esp-2: 0.5rem;
+	--esp-3: 0.75rem;
+	--esp-4: 1rem;
+	--esp-5: 1.5rem;
+	--esp-6: 2rem;
+	--esp-secao: clamp(4rem, 2.8rem + 6vw, 8.5rem);
+	--margem: clamp(1.25rem, 0.6rem + 3vw, 3rem);
+	--largura: 74rem;
+
+	/* ---------- Movimento ---------- */
+	--tempo-1: 140ms;
+	--tempo-2: 240ms;
+	--tempo-3: 420ms;
+	--curva: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* A pessoa escolheu um tema no botão: ele vence o do aparelho */
+:root[data-tema="claro"] {
+	color-scheme: light;
+}
+
+:root[data-tema="escuro"] {
+	color-scheme: dark;
+}

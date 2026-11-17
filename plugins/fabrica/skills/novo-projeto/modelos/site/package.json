@@ -1,0 +1,8 @@
+{
+	"scripts": {
+		"ver": "node ferramentas/servir.mjs --pasta site --abrir",
+		"telas": "node ferramentas/folha-de-telas.mjs",
+		"capa": "node ferramentas/capa.mjs",
+		"endereco": "node ferramentas/endereco.mjs"
+	}
+}

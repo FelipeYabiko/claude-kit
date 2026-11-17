@@ -1,0 +1,12 @@
+{
+	"nome": "site",
+	"descricao": "Site de páginas paradas (página de apresentação, portfólio, página de um negócio ou de um canal). Sem instalar nada, publica de graça no GitHub Pages.",
+	"estilos": {
+		"editorial": "papel quente, serifa com personalidade e vermelho-tijolo; bom para estúdio, autor, consultoria, gastronomia",
+		"vibrante": "branco, roxo elétrico e verde-limão, formas redondas e sombra dura; bom para criador de conteúdo, produto jovem, evento",
+		"tecnico": "cinza frio, azul preciso, cantos retos e fonte de código; bom para software, engenharia, serviço técnico"
+	},
+	"estiloPadrao": "editorial",
+	"atualizaveis": ["ferramentas", ".claude/hooks"],
+	"protegidos": ["ferramentas/fiscal/regras-do-projeto.mjs"]
+}

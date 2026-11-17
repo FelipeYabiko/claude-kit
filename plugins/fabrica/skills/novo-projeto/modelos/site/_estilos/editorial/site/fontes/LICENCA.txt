@@ -1,0 +1,4 @@
+As fontes desta pasta são livres (SIL Open Font License 1.1): podem ser usadas, copiadas e publicadas junto com o
+site, inclusive em trabalho comercial, sem pagar e sem pedir autorização. Só não podem ser vendidas sozinhas.
+Arquivos tirados dos pacotes @fontsource (fontsource.org), recorte "latin" (cobre o português).
+Texto da licença: https://openfontlicense.org

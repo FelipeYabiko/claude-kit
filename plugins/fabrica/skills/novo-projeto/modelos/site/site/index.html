@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{NOME}}</title>
+	<meta name="description" content="{{DESCRICAO}}">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="{{NOME}}">
+	<meta property="og:description" content="{{DESCRICAO}}">
+	<meta property="og:image" content="imagens/capa-para-redes.png">
+	<link rel="icon" href="imagens/icone.svg" type="image/svg+xml">
+	<link rel="stylesheet" href="estilo/tokens.css">
+	<link rel="stylesheet" href="estilo/base.css">
+	<link rel="stylesheet" href="estilo/secoes.css">
+	<link rel="stylesheet" href="estilo/toque.css">
+	<!-- Antes de desenhar: aplica o tema que a pessoa escolheu da última vez, para a página não piscar -->
+	<script>
+		try {
+			var tema = localStorage.getItem('tema');
+			if (tema === 'claro' || tema === 'escuro') document.documentElement.dataset.tema = tema;
+		} catch (e) {}
+		document.documentElement.classList.add('com-js');
+	</script>
+</head>
+<body>
+	<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+	<header class="topo" id="topo">
+		<div class="conteudo topo__linha">
+			<a class="marca" href="#topo" aria-label="{{NOME}}, voltar ao início">{{NOME}}</a>
+			<button class="topo__menu" type="button" aria-expanded="false" aria-controls="navegacao">Menu</button>
+			<nav class="topo__nav" id="navegacao" aria-label="Seções da página">
+				<a href="#servicos">Serviços</a>
+				<a href="#trabalhos">Trabalhos</a>
+				<a href="#como-funciona">Como funciona</a>
+				<a href="#perguntas">Perguntas</a>
+				<button class="topo__tema" type="button" data-trocar-tema aria-label="Trocar entre tema claro e escuro">
+					<span aria-hidden="true" class="topo__tema-icone"></span>
+				</button>
+				<a class="botao botao--pequeno" href="#contato">Pedir orçamento</a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="conteudo">
+		<!-- HERÓI: em 5 segundos a pessoa precisa entender o que é, para quem e o que fazer agora -->
+		<section class="heroi">
+			<div class="conteudo heroi__grade">
+				<div class="heroi__texto">
+					<p class="sobretitulo revelar" data-exemplo>Vídeo e motion para marcas pequenas</p>
+					<h1 class="heroi__titulo revelar" data-exemplo>Vídeos curtos que fazem o seu negócio <em>ser lembrado</em>.</h1>
+					<p class="heroi__apoio revelar" data-exemplo>Roteiro, animação e edição em um lugar só. Você conta a ideia numa conversa e recebe o vídeo pronto para postar em sete dias.</p>
+					<div class="heroi__acoes revelar">
+						<a class="botao" href="#contato" data-exemplo>Pedir orçamento</a>
+						<a class="botao botao--vazado" href="#trabalhos" data-exemplo>Ver os trabalhos</a>
+					</div>
+				</div>
+				<figure class="heroi__imagem revelar">
+					<img src="imagens/exemplo-capa.svg" alt="Imagem de exemplo: troque por uma foto ou cena do seu trabalho" width="960" height="1120">
+				</figure>
+			</div>
+		</section>
+
+		<!-- PROVA: números ou fatos que dá para conferir. Sem número de verdade, apague a seção -->
+		<section class="prova" aria-label="Em números">
+			<div class="conteudo">
+				<dl class="prova__lista">
+					<div class="revelar"><dt data-exemplo>vídeos entregues</dt><dd data-exemplo>120+</dd></div>
+					<div class="revelar"><dt data-exemplo>dias para o primeiro corte</dt><dd data-exemplo>7</dd></div>
+					<div class="revelar"><dt data-exemplo>clientes que voltam</dt><dd data-exemplo>8 em 10</dd></div>
+				</dl>
+			</div>
+		</section>
+
+		<!-- SERVIÇOS: no máximo 3 ou 4, cada um com o benefício para o cliente, não a lista de tarefas -->
+		<section class="secao" id="servicos">
+			<div class="conteudo">
+				<header class="secao__cabeca">
+					<p class="sobretitulo revelar">Serviços</p>
+					<h2 class="secao__titulo revelar" data-exemplo>Do roteiro ao arquivo final</h2>
+				</header>
+				<ul class="cartoes">
+					<li class="cartao revelar">
+						<span class="cartao__numero" aria-hidden="true">01</span>
+						<h3 data-exemplo>Vídeo para redes</h3>
+						<p data-exemplo>Reels, Shorts e TikTok de 15 a 60 segundos, com legenda e capa. Pensado para quem assiste sem som.</p>
+					</li>
+					<li class="cartao revelar">
+						<span class="cartao__numero" aria-hidden="true">02</span>
+						<h3 data-exemplo>Animação de marca</h3>
+						<p data-exemplo>Logo animado, vinhetas e telas de abertura que deixam todo vídeo com a mesma cara.</p>
+					</li>
+					<li class="cartao revelar">
+						<span class="cartao__numero" aria-hidden="true">03</span>
+						<h3 data-exemplo>Vídeo explicativo</h3>
+						<p data-exemplo>Um a dois minutos mostrando como o seu produto funciona, com narração e animação sob medida.</p>
+					</li>
+				</ul>
+			</div>
+		</section>
+
+		<!-- TRABALHOS: os 4 melhores, não todos. Cada um com o que foi feito e o resultado -->
+		<section class="secao secao--realce" id="trabalhos">
+			<div class="conteudo">
+				<header class="secao__cabeca">
+					<p class="sobretitulo revelar">Trabalhos</p>
+					<h2 class="secao__titulo revelar" data-exemplo>Alguns projetos recentes</h2>
+				</header>
+				<ul class="galeria">
+					<li class="galeria__item revelar">
+						<img src="imagens/exemplo-trabalho-1.svg" alt="Imagem de exemplo do primeiro trabalho" width="960" height="720" loading="lazy">
+						<div class="galeria__legenda"><h3 data-exemplo>Padaria do Bairro</h3><p data-exemplo>Série de 12 Reels · 40 mil visualizações no primeiro mês</p></div>
+					</li>
+					<li class="galeria__item revelar">
+						<img src="imagens/exemplo-trabalho-2.svg" alt="Imagem de exemplo do segundo trabalho" width="960" height="720" loading="lazy">
+						<div class="galeria__legenda"><h3 data-exemplo>Clínica Horizonte</h3><p data-exemplo>Vídeo explicativo de 90 segundos para a sala de espera</p></div>
+					</li>
+					<li class="galeria__item revelar">
+						<img src="imagens/exemplo-trabalho-3.svg" alt="Imagem de exemplo do terceiro trabalho" width="960" height="720" loading="lazy">
+						<div class="galeria__legenda"><h3 data-exemplo>Loja Trama</h3><p data-exemplo>Logo animado e pacote de vinhetas</p></div>
+					</li>
+					<li class="galeria__item revelar">
+						<img src="imagens/exemplo-trabalho-4.svg" alt="Imagem de exemplo do quarto trabalho" width="960" height="720" loading="lazy">
+						<div class="galeria__legenda"><h3 data-exemplo>Curso Raiz</h3><p data-exemplo>Abertura e 8 aulas animadas</p></div>
+					</li>
+				</ul>
+			</div>
+		</section>
+
+		<!-- COMO FUNCIONA: tira o medo de começar. 3 passos, com prazo -->
+		<section class="secao" id="como-funciona">
+			<div class="conteudo">
+				<header class="secao__cabeca">
+					<p class="sobretitulo revelar">Como funciona</p>
+					<h2 class="secao__titulo revelar" data-exemplo>Três passos, sete dias</h2>
+				</header>
+				<ol class="passos">
+					<li class="passo revelar"><h3 data-exemplo>Conversa</h3><p data-exemplo>Trinta minutos por vídeo ou mensagem para entender o negócio, o público e o que o vídeo precisa causar.</p></li>
+					<li class="passo revelar"><h3 data-exemplo>Roteiro aprovado</h3><p data-exemplo>Você recebe o texto e o desenho das cenas. Só começamos a produzir depois do seu sim.</p></li>
+					<li class="passo revelar"><h3 data-exemplo>Vídeo pronto</h3><p data-exemplo>Primeiro corte em sete dias, com duas rodadas de ajuste incluídas e os arquivos para cada rede.</p></li>
+				</ol>
+			</div>
+		</section>
+
+		<!-- DEPOIMENTO: um só, de verdade, com nome. Inventado nunca: sem depoimento real, apague a seção -->
+		<section class="secao secao--estreita">
+			<div class="conteudo">
+				<figure class="depoimento revelar">
+					<blockquote data-exemplo>“A gente postava foto e ninguém via. No primeiro mês de vídeo, três clientes novos disseram que vieram pelo Instagram.”</blockquote>
+					<figcaption><strong data-exemplo>Marina Souza</strong> <span data-exemplo>dona da Padaria do Bairro</span></figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<!-- PERGUNTAS: as dúvidas que impedem a pessoa de chamar. Preço, prazo e o que precisa mandar -->
+		<section class="secao secao--realce" id="perguntas">
+			<div class="conteudo conteudo--estreito">
+				<header class="secao__cabeca">
+					<p class="sobretitulo revelar">Perguntas</p>
+					<h2 class="secao__titulo revelar">Antes de você perguntar</h2>
+				</header>
+				<div class="perguntas">
+					<details class="pergunta revelar">
+						<summary data-exemplo>Quanto custa?</summary>
+						<p data-exemplo>Um vídeo para redes parte de R$ 600. Pacotes mensais saem mais em conta. O orçamento fechado vem depois da primeira conversa, que é gratuita.</p>
+					</details>
+					<details class="pergunta revelar">
+						<summary data-exemplo>O que eu preciso mandar?</summary>
+						<p data-exemplo>O logo, as cores da marca se tiver, e fotos ou vídeos do produto. Se não tiver nada disso, a gente resolve junto.</p>
+					</details>
+					<details class="pergunta revelar">
+						<summary data-exemplo>E se eu não gostar?</summary>
+						<p data-exemplo>Você aprova o roteiro antes da produção e tem duas rodadas de ajuste no vídeo. Na prática, quase tudo se resolve no roteiro.</p>
+					</details>
+				</div>
+			</div>
+		</section>
+
+		<!-- CONTATO: um caminho principal (no Brasil, WhatsApp) e um reserva -->
+		<section class="secao chamada" id="contato">
+			<div class="conteudo chamada__miolo">
+				<h2 class="chamada__titulo revelar" data-exemplo>Vamos fazer o seu primeiro vídeo?</h2>
+				<p class="chamada__apoio revelar" data-exemplo>Conte a ideia em uma mensagem. A resposta chega no mesmo dia útil.</p>
+				<div class="chamada__acoes revelar">
+					<a class="botao botao--grande" href="https://wa.me/5511999999999?text=Oi!%20Vi%20o%20site%20e%20quero%20um%20or%C3%A7amento." data-exemplo>Chamar no WhatsApp</a>
+					<a class="botao botao--vazado botao--grande" href="mailto:contato@exemplo.com.br" data-exemplo>contato@exemplo.com.br</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="rodape">
+		<div class="conteudo rodape__linha">
+			<p>© <span data-ano>{{ANO}}</span> {{NOME}}</p>
+			<ul class="rodape__links">
+				<li><a href="https://instagram.com/" data-exemplo>Instagram</a></li>
+				<li><a href="https://youtube.com/" data-exemplo>YouTube</a></li>
+				<li><a href="#topo">Voltar ao início</a></li>
+			</ul>
+		</div>
+	</footer>
+
+	<script src="js/site.js" defer></script>
+</body>
+</html>

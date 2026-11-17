@@ -1,0 +1,6 @@
+{
+	"nome": "livre",
+	"descricao": "Só o esqueleto de todo projeto (instruções, painel, ficha, manual, fiscal, travas). Para ideias que não cabem nos outros modelos.",
+	"atualizaveis": ["ferramentas", ".claude/hooks"],
+	"protegidos": ["ferramentas/fiscal/regras-do-projeto.mjs"]
+}

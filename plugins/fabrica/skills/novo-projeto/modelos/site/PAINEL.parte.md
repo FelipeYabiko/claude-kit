@@ -1,0 +1,3 @@
+- **No computador:** dois cliques em `Ver {{NOME_ARQUIVO}}.bat` (abre o site no navegador). Ou `npm run ver`.
+- **No ar:** ainda não publicado. Quando publicar, o endereço entra aqui.
+- **Mudar alguma coisa:** abra uma conversa no Claude Code com este repositório e peça em português.

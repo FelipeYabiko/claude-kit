@@ -1,0 +1,80 @@
+<!-- FORMULÁRIO DE CONTATO
+     Atenção: site de páginas paradas não recebe formulário sozinho. É preciso um serviço que receba os envios e mande
+     para o e-mail do dono (ex.: Formspree, Web3Forms). Isso é uma dependência de fora: pergunte ao dono antes, crie a
+     conta com ele e anote em "Dependências aprovadas" da FICHA.md. Sem serviço, use os botões de WhatsApp e e-mail.
+     Regras: o mínimo de campos (cada campo a mais derruba os envios); rótulo visível em todo campo; diga o que
+     acontece depois ("respondo em 1 dia útil"); teste um envio de verdade antes de publicar. -->
+
+<section class="secao" id="contato-formulario">
+	<div class="conteudo conteudo--estreito">
+		<header class="secao__cabeca">
+			<p class="sobretitulo revelar">Contato</p>
+			<h2 class="secao__titulo revelar" data-exemplo>Conte a sua ideia</h2>
+		</header>
+		<form class="formulario revelar" action="https://ENDERECO-DO-SERVICO-DE-FORMULARIO" method="post">
+			<div class="campo">
+				<label for="form-nome">Seu nome</label>
+				<input id="form-nome" name="nome" type="text" autocomplete="name" required>
+			</div>
+			<div class="campo">
+				<label for="form-contato">E-mail ou WhatsApp</label>
+				<input id="form-contato" name="contato" type="text" autocomplete="email" required>
+			</div>
+			<div class="campo">
+				<label for="form-mensagem">O que você precisa?</label>
+				<textarea id="form-mensagem" name="mensagem" rows="5" required></textarea>
+			</div>
+			<button class="botao botao--grande" type="submit">Enviar mensagem</button>
+			<p class="formulario__nota" data-exemplo>Respondo em até um dia útil. Seus dados não são passados a ninguém.</p>
+		</form>
+	</div>
+</section>
+
+<style>
+/* ---------- Formulário ---------- */
+
+.formulario {
+	display: grid;
+	gap: var(--esp-5);
+	justify-items: start;
+}
+
+.campo {
+	display: grid;
+	gap: var(--esp-2);
+	width: 100%;
+}
+
+.campo label {
+	font-size: var(--tam-1);
+	font-weight: 600;
+}
+
+.campo input,
+.campo textarea {
+	width: 100%;
+	min-height: 3rem;
+	padding: 0.7em 0.9em;
+	border: 1px solid var(--cor-borda-forte);
+	border-radius: var(--raio-p);
+	background: var(--cor-superficie);
+	color: var(--cor-texto);
+	font: inherit;
+}
+
+.campo textarea {
+	resize: vertical;
+}
+
+.campo input:focus-visible,
+.campo textarea:focus-visible {
+	outline: 3px solid var(--cor-destaque);
+	outline-offset: 1px;
+	border-color: var(--cor-destaque);
+}
+
+.formulario__nota {
+	font-size: var(--tam-1);
+	color: var(--cor-texto-suave);
+}
+</style>

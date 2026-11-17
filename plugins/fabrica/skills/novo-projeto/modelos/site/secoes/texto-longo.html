@@ -1,0 +1,57 @@
+<!-- TEXTO LONGO (página de leitura)
+     Quando usar: página "sobre", artigo, política de privacidade, termos. Vira o miolo de uma página própria
+     (ex.: site/sobre.html), entre o topo e o rodapé copiados do index.html.
+     Regras: coluna estreita (até ~70 letras por linha); subtítulos a cada 3 ou 4 parágrafos; um só <h1> na página. -->
+
+<article class="secao leitura">
+	<div class="conteudo conteudo--estreito">
+		<p class="sobretitulo">Sobre</p>
+		<h1 class="leitura__titulo" data-exemplo>Por que eu faço vídeo para negócio pequeno</h1>
+		<p class="leitura__abre" data-exemplo>Comecei editando o vídeo da padaria da minha tia. Em um mês ela precisou contratar mais uma pessoa para o balcão.</p>
+		<h2 data-exemplo>O que eu aprendi ali</h2>
+		<p data-exemplo>Negócio pequeno não precisa de vídeo de cinema. Precisa de vídeo que mostre, em quinze segundos, por que vale a pena entrar na loja.</p>
+		<p data-exemplo>É isso que eu faço desde então, com um processo simples: uma conversa, um roteiro aprovado, um vídeo pronto.</p>
+		<h2 data-exemplo>Como eu trabalho</h2>
+		<ul>
+			<li data-exemplo>Você aprova o roteiro antes de qualquer gravação.</li>
+			<li data-exemplo>O primeiro corte chega em sete dias.</li>
+			<li data-exemplo>Os arquivos são seus, sem letra miúda.</li>
+		</ul>
+	</div>
+</article>
+
+<style>
+/* ---------- Texto longo ---------- */
+
+.leitura__titulo {
+	margin-block: var(--esp-4) var(--esp-5);
+	font-size: var(--tam-5);
+}
+
+.leitura__abre {
+	font-size: var(--tam-3);
+	line-height: 1.5;
+	color: var(--cor-texto-suave);
+}
+
+.leitura h2 {
+	margin-block: var(--esp-6) var(--esp-3);
+	font-size: var(--tam-4);
+}
+
+.leitura p + p,
+.leitura ul {
+	margin-top: var(--esp-4);
+}
+
+.leitura ul {
+	display: grid;
+	gap: var(--esp-2);
+	padding-left: 1.25em;
+	list-style: disc;
+}
+
+.leitura li::marker {
+	color: var(--cor-destaque-texto);
+}
+</style>
