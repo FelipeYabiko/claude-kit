@@ -14,7 +14,7 @@ formato, com os fatos separados em **Conferido** (com fonte e data) e **A confir
 | 3 | Página do canal (link da bio) | `site` | pequeno | a fazer |
 | 4 | Números do YouTube sozinhos | `robo` | médio | a fazer |
 | 5 | Calendário de postagens | `sistema` | pequeno | a fazer |
-| 6 | Portfólio no padrão da fábrica | adotar | pequeno | a fazer |
+| 6 | Portfólio no padrão da fábrica | adotar | pequeno | feita em 17/11/2026 (`FelipeYabiko/portfolio`) |
 | 7 | Clientes e projetos | `sistema` | pequeno (é o exemplo do modelo) | a fazer |
 | 8 | Banco de pautas com busca | `sistema` | médio | a fazer |
 | 9 | Vigia de links das descrições | `robo` | médio | a fazer |
@@ -124,8 +124,10 @@ nele sem estragar: painel, ficha, fiscal e folha de telas.
 **Primeira versão:** `criar.mjs --adotar` no repositório, com `--tipo site`; preencher `PAINEL.md` e `FICHA.md` com o
 que o site já é; resolver o que o fiscal apontar (imagens pesadas, textos alternativos, contraste), um item por vez.
 
-**Cuidado:** adotar **não** reescreve o site nem muda o desenho. As páginas dele ficam na raiz, e não em `site/`:
-conferir se o fiscal e a folha de telas precisam de ajuste de caminho antes de prometer.
+**Feita em 17/11/2026.** O que a adoção ensinou (já está na fábrica): site antigo tem as páginas na pasta principal
+(`"pastaDoSite": "."` no `fabrica.json`), usa `images/` em vez de `imagens/`, não tem tokens de cor (a capa sai
+neutra) e costuma ter link e imagem de exemplo esquecidos (o fiscal agora pega). Ficou com o dono: o endereço do
+LinkedIn, as imagens de verdade de dois projetos e o endereço do site no ar.
 
 ## 7. Clientes e projetos (`sistema`)
 
