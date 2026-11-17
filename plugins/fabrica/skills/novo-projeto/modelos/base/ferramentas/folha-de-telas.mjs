@@ -105,7 +105,13 @@ for (const tela of escolhidas) {
 			const onde = `${tela.nome} (${nomeAparelho}, ${tema})`;
 			pagina.on('pageerror', (e) => problemas.push({nivel: 'erro', onde, mensagem: `erro de programação na página: ${e.message}`}));
 			pagina.on('console', (m) => m.type() === 'error' && problemas.push({nivel: 'erro', onde, mensagem: `erro no console: ${m.text().slice(0, 200)}`}));
-			pagina.on('requestfailed', (r) => problemas.push({nivel: 'erro', onde, mensagem: `não carregou: ${r.url()}`}));
+			pagina.on('requestfailed', (r) => {
+				// vídeo e áudio: o navegador corta o download de propósito (só baixa o pedaço que vai tocar), e o Chromium
+				// da nuvem nem toca MP4. Isso não é defeito do site; vira aviso para conferir no computador.
+				const midia = r.resourceType() === 'media' || /\.(mp4|webm|mov|mp3|m4a|ogg)(\?|$)/i.test(r.url());
+				if (midia && /ERR_ABORTED/.test(r.failure()?.errorText ?? '')) problemas.push({nivel: 'aviso', onde, mensagem: `vídeo ou áudio não tocou aqui (${r.url().split('/').pop()}): confira abrindo o site no computador`});
+				else problemas.push({nivel: 'erro', onde, mensagem: `não carregou: ${r.url()}`});
+			});
 			pagina.on('response', (r) => r.status() >= 400 && problemas.push({nivel: 'erro', onde, mensagem: `resposta ${r.status()} em ${r.url()}`}));
 			await pagina.goto(endereco + tela.caminho, {waitUntil: 'networkidle'});
 			await pagina.evaluate(() => document.fonts?.ready);

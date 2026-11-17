@@ -4,7 +4,7 @@
     "name": "Felipe Yabiko"
   },
   "metadata": {
-    "description": "Kit pessoal do Felipe: processo ECC essencial, skills de design do rtadewald, preferências de início de projeto e aprendizado (assistir vídeos e guardar o que ensinam como skills)."
+    "description": "Kit pessoal do Felipe: processo ECC essencial, skills de design do rtadewald, preferências de início de projeto, aprendizado (assistir vídeos e guardar o que ensinam como skills) e a fábrica de projetos novos."
   },
   "plugins": [
     {
@@ -16,6 +16,11 @@
       "name": "aprendizado",
       "source": "./plugins/aprendizado",
       "description": "Aprender e crescer: assistir vídeos e guardar as lições como skills, guardar como skill o que você ensinar na conversa e recomendar skills novas. As skills aprendidas moram aqui e valem em toda sessão."
+    },
+    {
+      "name": "fabrica",
+      "source": "./plugins/fabrica",
+      "description": "Fábrica de projetos: transforma uma ideia (site, sistema de cadastros, robô que roda sozinho ou outra coisa) num projeto novo que já funciona, com entrevista, ficha do combinado, modelos prontos, fiscal automático, folha de telas e manual passo a passo, para qualquer modelo do Claude manter o padrão."
     },
     {
       "name": "ecc",

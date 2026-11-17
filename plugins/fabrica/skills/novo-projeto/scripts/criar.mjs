@@ -219,8 +219,15 @@ export const adotarProjeto = ({pasta, tipo = 'livre', nome, descricao = ''}) => 
 	const valores = valoresDe({nome: nomeFinalDoProjeto, descricao: descricao || `${nomeFinalDoProjeto}.`, tipo, pasta: destino});
 	const criados = [];
 	const mantidos = [];
-	// de um projeto existente só entra o esqueleto (documentos, fiscal, travas): o miolo é o que ele já tem
-	for (const [rel, conteudo] of montarArquivos('livre')) {
+	// de um projeto existente só entra o esqueleto (documentos, fiscal, travas): o miolo é o que ele já tem.
+	// Alguns tipos trazem também as ferramentas próprias (site: folha de telas, capa, endereço) e os comandos delas.
+	const esqueleto = montarArquivos('livre');
+	const manifesto = tipo === 'livre' ? {} : lerManifesto(tipo);
+	if (manifesto.ferramentasNaAdocao) {
+		const doTipo = montarArquivos(tipo, {estilo: manifesto.estiloPadrao});
+		for (const [rel, conteudo] of doTipo) if (rel.startsWith('ferramentas/') || rel === 'package.json') esqueleto.set(rel, conteudo);
+	}
+	for (const [rel, conteudo] of esqueleto) {
 		const final = nomeFinal(rel, valores);
 		if (final.endsWith('.gitkeep')) continue;
 		const inteiro = path.join(destino, final);
@@ -253,7 +260,9 @@ export const adotarProjeto = ({pasta, tipo = 'livre', nome, descricao = ''}) => 
 	}
 	const arquivoFabrica = path.join(destino, 'fabrica.json');
 	if (!fs.existsSync(arquivoFabrica)) {
-		fs.writeFileSync(arquivoFabrica, `${JSON.stringify({fabrica: VERSAO, tipo, nome: nomeFinalDoProjeto, adotadoEm: new Date().toISOString().slice(0, 10), pecas: assinarPecas(destino, 'livre')}, null, '\t')}\n`);
+		// site que não mora em site/ (o comum em projeto adotado): as ferramentas precisam saber onde ele está
+		const pastaDoSite = tipo === 'site' && !fs.existsSync(path.join(destino, 'site', 'index.html')) ? {pastaDoSite: '.'} : {};
+		fs.writeFileSync(arquivoFabrica, `${JSON.stringify({fabrica: VERSAO, tipo, nome: nomeFinalDoProjeto, ...pastaDoSite, adotadoEm: new Date().toISOString().slice(0, 10), pecas: assinarPecas(destino, tipo)}, null, '\t')}\n`);
 		criados.push('fabrica.json');
 	}
 	return {criados: criados.sort(), mantidos: mantidos.sort()};

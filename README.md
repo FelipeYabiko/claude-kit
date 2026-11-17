@@ -6,6 +6,7 @@ Meu marketplace de plugins do Claude Code. Instalado uma vez, vale em todas as s
 |---|---|---|
 | `preferencias-felipe` | Ganchos de início de sessão e de cada mensagem: responder em português e, em projeto, avaliar quais skills e agentes servem, perguntar quais você quer usar e usar só os aprovados. Traz a skill `escolher-skills`, um mapa de qual skill ou agente usar em cada caso. | ~200 tokens + ~60 por mensagem |
 | `ecc` | ECC essencial: agentes `planner`, `tdd-guide`, `code-reviewer`, `python-reviewer` e `security-reviewer`, mais a skill `processo-ecc` com as regras `common`, `python`, `typescript` e `web`. | ~500 tokens |
+| `fabrica` | Fábrica de projetos: skill `novo-projeto` que transforma uma ideia em projeto que já funciona. Entrevista, ficha do combinado, 4 modelos prontos (`site` com 3 estilos, `sistema` de cadastros, `robo` que roda sozinho, `livre`), fiscal automático, folha de telas, travas e manual passo a passo, para o modelo mais barato manter o padrão. Detalhes em `plugins/fabrica/LEIA.md`. | ~250 tokens |
 | `aprendizado` | Skills `aprender-com-video` (assistir um vídeo e guardar o que ele ensina como skill), `guardar-skill` (guardar como skill o que você ensinar ou corrigir) e `recomendar-skills` (sugerir skills para usar, instalar ou aprender). As skills que você guardar moram aqui; lista em `plugins/aprendizado/CATALOGO.md`. | ~250 tokens + ~100 por skill guardada |
 | `watch` | Faz o Claude assistir vídeos (link ou arquivo), de [bradautomates/claude-video](https://github.com/bradautomates/claude-video), fixado num commit revisado. Com `GEMINI_API_KEY`, o Gemini assiste imagem e som. | ~150 tokens |
 | `andrej-karpathy-skills` | Skill `karpathy-guidelines`, de [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills), fixada num commit revisado: 4 regras para o Claude programar melhor (pensar antes, fazer o simples, mexer só no necessário, verificar o resultado). | ~100 tokens |
@@ -21,12 +22,13 @@ Meu marketplace de plugins do Claude Code. Instalado uma vez, vale em todas as s
 /plugin install ecc@claude-kit
 /plugin install rtadewald-design@claude-kit
 /plugin install aprendizado@claude-kit
+/plugin install fabrica@claude-kit
 /plugin install watch@claude-kit
 /plugin install andrej-karpathy-skills@claude-kit
 ```
 
 **Automático no computador:** o `.claude/settings.json` deste repositório registra o marketplace e
-ativa os seis plugins quando você abre o projeto no Claude Code do computador (terminal, app ou IDE).
+ativa os sete plugins quando você abre o projeto no Claude Code do computador (terminal, app ou IDE).
 O Claude Code pede para confiar na pasta e instalar os plugins na primeira vez. Para ter o mesmo em
 outro projeto, copie o arquivo para o `.claude/` dele; para valer em todos os projetos do computador,
 junte o mesmo conteúdo ao `~/.claude/settings.json`.
@@ -41,7 +43,7 @@ plugins da conta entram sozinhos em toda sessão nova, em qualquer repositório.
 2. Clique em **Add → Add marketplace** (não use a busca do **Discover**: ela só mostra o diretório
    oficial e os marketplaces já adicionados).
 3. Digite `FelipeYabiko/claude-kit` e confirme.
-4. Abra `preferencias-felipe`, `ecc`, `rtadewald-design`, `aprendizado`, `watch` e
+4. Abra `preferencias-felipe`, `ecc`, `rtadewald-design`, `aprendizado`, `fabrica`, `watch` e
    `andrej-karpathy-skills` e clique em **Add**
    em cada um. Plugin novo no kit sempre precisa desse **Add** uma vez; o **Sync** só atualiza os que
    você já adicionou.
@@ -81,7 +83,8 @@ agentes que o próprio projeto define em `.claude/` ou no `CLAUDE.md` seguem as 
 |---|---|
 | "Cria um app de tarefas em Python" | Pergunta quais usar (ECC, planner, tdd-guide, revisores...); com sim: plano → seu OK → testes primeiro → código → revisores → commit |
 | "Arruma esse bug" | Pergunta se quer `tdd-guide` e revisor; com sim: teste que reproduz o bug, correção, revisão |
-| "Quero uma landing page" | Sugere `/rtadewald-design:plan-screen` e, a cada etapa, o próximo comando |
+| "Quero criar um site / um sistema / um robô para..." | Fábrica de projetos: entrevista curta, ficha para você aprovar, projeto criado já funcionando, folha de telas para aprovar e entrega |
+| "Quero uma landing page" | Fábrica (modelo `site`); para desenhar tela por tela, sugere também `/rtadewald-design:plan-screen` |
 | "Transforma esse relatório em PDF" | Pergunta se pode usar `pdf` e segue com o que você aprovar |
 | Pergunta rápida | Responde direto, sem ferramenta |
 
@@ -143,6 +146,9 @@ variáveis de ambiente do sistema.
   [Customize → Plugins](https://claude.ai/customize/plugins) e clique em **Check for updates** (ou
   deixe **Sync automatically** ligado). No computador, rode `/plugin marketplace update claude-kit`.
   A versão nova entra na próxima sessão.
+- `fabrica` mora aqui: modelos em `plugins/fabrica/skills/novo-projeto/modelos/`. Antes do merge, rode
+  `npm test` dentro de `plugins/fabrica/` e aumente `version` no `plugin.json` dela. Os projetos já criados
+  recebem as ferramentas novas com `criar.mjs --atualizar <pasta>` (veja o `LEIA.md` da fábrica).
 - `aprendizado` também mora aqui; a skill `guardar-skill` já aumenta a versão sozinha quando guarda
   uma skill nova.
 - `watch` é lido de `bradautomates/claude-video`, no commit fixado em `sha` no

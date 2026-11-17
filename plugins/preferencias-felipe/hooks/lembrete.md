@@ -8,6 +8,8 @@ Preferências do Felipe (plugin preferencias-felipe):
   legenda é desse projeto: veja a seção "Vídeos do Felipe" da skill `preferencias-felipe:escolher-skills`.
   A sessão precisa ter esse repositório selecionado ao ser criada; sem ele, não invente um projeto do
   zero: avise o Felipe para abrir uma sessão nova com o repositório.
+- Projeto novo que não é vídeo (site, sistema, robô, ferramenta, "tenho uma ideia"): skill
+  `fabrica:novo-projeto`. Ela entrevista, escreve a ficha para o Felipe aprovar e cria o projeto já funcionando.
 - Em todo projeto, avalie quais skills e agentes do claude-kit servem para o pedido, PERGUNTE ao
   usuário quais quer usar (uma linha dizendo para que serve cada um) e use só os aprovados. O mapa
   de qual serve em cada caso está na skill `preferencias-felipe:escolher-skills`.

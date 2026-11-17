@@ -7,7 +7,11 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const pasta = path.join(raiz, 'site');
+const arquivoFabrica = path.join(raiz, 'fabrica.json');
+const fabrica = JSON.parse(fs.readFileSync(arquivoFabrica, 'utf8'));
+// num projeto adotado o site pode não morar em site/: o fabrica.json diz onde (pastaDoSite)
+const pasta = path.resolve(raiz, fabrica.pastaDoSite ?? 'site');
+const FORA = new Set(['node_modules', 'folha', 'secoes', 'ferramentas', 'docs', 'tests', 'dist']);
 let endereco = process.argv[2] ?? '';
 if (!/^https:\/\/[^\s/]+\.[^\s/]+(\/[^\s]*)?$/.test(endereco)) {
 	console.error('Diga o endereço completo do site, começando com https://  Ex.: npm run endereco -- https://felipeyabiko.github.io/meu-site/');
@@ -18,7 +22,7 @@ if (!endereco.endsWith('/')) endereco += '/';
 const paginas = (dir, base = dir) =>
 	fs.readdirSync(dir, {withFileTypes: true}).flatMap((item) => {
 		const inteiro = path.join(dir, item.name);
-		if (item.isDirectory()) return paginas(inteiro, base);
+		if (item.isDirectory()) return item.name.startsWith('.') || FORA.has(item.name) ? [] : paginas(inteiro, base);
 		return item.name.endsWith('.html') ? [path.relative(base, inteiro).split(path.sep).join('/')] : [];
 	});
 
@@ -51,8 +55,6 @@ const hoje = new Date().toISOString().slice(0, 10);
 fs.writeFileSync(path.join(pasta, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${noMapa.map((u) => `\t<url><loc>${u}</loc><lastmod>${hoje}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 fs.writeFileSync(path.join(pasta, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${endereco}sitemap.xml\n`);
 
-const arquivoFabrica = path.join(raiz, 'fabrica.json');
-const fabrica = JSON.parse(fs.readFileSync(arquivoFabrica, 'utf8'));
 fs.writeFileSync(arquivoFabrica, `${JSON.stringify({...fabrica, endereco}, null, '\t')}\n`);
 
 console.log(`Endereço ${endereco} gravado em ${mudadas.length} página(s) (${mudadas.join(', ') || 'já estavam certas'}), no sitemap.xml (${noMapa.length} página(s)) e no robots.txt.`);

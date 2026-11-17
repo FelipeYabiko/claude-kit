@@ -20,16 +20,19 @@ try {
 	process.exit(2);
 }
 
-const html = fs.readFileSync(path.join(raiz, 'site', 'index.html'), 'utf8');
+const fabrica = JSON.parse(fs.readFileSync(path.join(raiz, 'fabrica.json'), 'utf8'));
+// num projeto adotado o site pode não morar em site/: o fabrica.json diz onde (pastaDoSite)
+const pastaDoSite = path.resolve(raiz, fabrica.pastaDoSite ?? 'site');
+const html = fs.readFileSync(path.join(pastaDoSite, 'index.html'), 'utf8');
 const tags = lerTags(html);
 const de = (nome) => {
 	const tag = tags.find((t) => t.nome === nome);
 	return tag ? textoDe(html, tag) : '';
 };
-const marca = JSON.parse(fs.readFileSync(path.join(raiz, 'fabrica.json'), 'utf8')).nome ?? de('title');
+const marca = fabrica.nome ?? de('title');
 const titulo = opcao('titulo') ?? de('h1') ?? marca;
 const escapar = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-const estilo = (arquivo) => pathToFileURL(path.join(raiz, 'site', 'estilo', arquivo)).href;
+const estilo = (arquivo) => pathToFileURL(path.join(pastaDoSite, 'estilo', arquivo)).href;
 
 const pagina = `<!doctype html><html lang="pt-BR" data-tema="claro"><head><meta charset="utf-8">
 <link rel="stylesheet" href="${estilo('tokens.css')}"><link rel="stylesheet" href="${estilo('base.css')}">
@@ -40,16 +43,17 @@ const pagina = `<!doctype html><html lang="pt-BR" data-tema="claro"><head><meta 
 	.barra { height: 14px; width: 220px; border-radius: 999px; background: var(--cor-destaque); }
 </style></head><body><div class="marca">${escapar(marca)}</div><h1>${escapar(titulo)}</h1><div class="barra"></div></body></html>`;
 
-const temporario = path.join(raiz, 'site', '_capa.html');
+const temporario = path.join(pastaDoSite, '_capa.html');
 fs.writeFileSync(temporario, pagina);
 const navegador = await playwright.chromium.launch();
 try {
 	const aba = await navegador.newPage({viewport: {width: 1200, height: 630}, colorScheme: 'light'});
 	await aba.goto(pathToFileURL(temporario).href, {waitUntil: 'load'});
 	await aba.evaluate(() => document.fonts.ready);
-	const saida = path.join(raiz, 'site', 'imagens', 'capa-para-redes.png');
+	fs.mkdirSync(path.join(pastaDoSite, 'imagens'), {recursive: true});
+	const saida = path.join(pastaDoSite, 'imagens', 'capa-para-redes.png');
 	await aba.screenshot({path: saida});
-	console.log(`Capa gravada em site/imagens/capa-para-redes.png (${Math.round(fs.statSync(saida).size / 1024)} KB). Abra e olhe: o título cabe? Dá para ler pequeno?`);
+	console.log(`Capa gravada em ${path.relative(raiz, saida).split(path.sep).join('/')} (${Math.round(fs.statSync(saida).size / 1024)} KB). Abra e olhe: o título cabe? Dá para ler pequeno?`);
 } finally {
 	await navegador.close();
 	fs.rmSync(temporario, {force: true});

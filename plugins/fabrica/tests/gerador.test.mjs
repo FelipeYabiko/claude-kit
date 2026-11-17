@@ -164,6 +164,28 @@ test('adotar: põe o padrão num projeto que já existe sem sobrescrever nada', 
 	assert.deepEqual(segunda.criados, [], 'adotar de novo não muda nada');
 });
 
+test('adotar um site com as páginas na pasta principal: traz as ferramentas do site e aponta para a pasta certa', async () => {
+	const pasta = path.join(pastaTemporaria(), 'site-antigo');
+	escrever(pasta, {'index.html': '<!doctype html>\n<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Antigo</title></head><body><h1>Oi</h1><a href="https://x.com"></a></body></html>\n', 'styles/style.css': 'body { color: #333; }\n'});
+	adotarProjeto({pasta, tipo: 'site', nome: 'Site Antigo'});
+	const fabrica = JSON.parse(fs.readFileSync(path.join(pasta, 'fabrica.json'), 'utf8'));
+	assert.equal(fabrica.pastaDoSite, '.', 'as páginas estão na raiz, não em site/');
+	for (const arquivo of ['ferramentas/folha-de-telas.mjs', 'ferramentas/telas.config.mjs', 'ferramentas/capa.mjs', 'ferramentas/endereco.mjs']) assert.ok(fs.existsSync(path.join(pasta, arquivo)), `trouxe ${arquivo}`);
+	const scripts = JSON.parse(fs.readFileSync(path.join(pasta, 'package.json'), 'utf8')).scripts;
+	assert.ok(scripts.telas && scripts.capa && scripts.ver && scripts.endereco, 'os comandos do site entram');
+	assert.ok(!fs.existsSync(path.join(pasta, 'site')), 'não inventa uma pasta site/');
+	const {preparar} = await import(`${path.join(pasta, 'ferramentas', 'telas.config.mjs')}?t=${Date.now()}`);
+	const {telas, fechar} = await preparar();
+	assert.deepEqual(telas.map((t) => t.caminho), ['/index.html'], 'a folha de telas acha a página da raiz e ignora docs/, ferramentas/ e .claude/');
+	fechar();
+	const r = await fiscal(pasta);
+	assert.ok(r.erros.some((e) => e.regra === 'links' && /<a> sem texto/.test(e.mensagem)), 'o fiscal já aponta o que o site antigo tem de errado');
+	const novoSite = path.join(pastaTemporaria(), 'com-pasta-site');
+	escrever(novoSite, {'site/index.html': '<!doctype html><title>x</title>'});
+	adotarProjeto({pasta: novoSite, tipo: 'site', nome: 'Com Pasta'});
+	assert.equal(JSON.parse(fs.readFileSync(path.join(novoSite, 'fabrica.json'), 'utf8')).pastaDoSite, undefined, 'site em site/ não precisa da marca');
+});
+
 test('atualizar: traz as peças novas da fábrica e não toca no que é do projeto', () => {
 	const {pasta} = novo('sistema');
 	const meu = {'modelo.mjs': '// meu modelo\n', 'regras.mjs': '// minhas regras\n', 'telas/tokens.css': ':root { --cor-fundo: #fff; }\n', 'ferramentas/fiscal/regras-do-projeto.mjs': '// minha regra\nexport const regrasDoProjeto = [];\n', 'FICHA.md': '# minha ficha\n', 'exemplos/semente.mjs': '// meus exemplos\n'};

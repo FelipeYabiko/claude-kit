@@ -28,6 +28,17 @@ achar quais combinam com o pedido, principalmente quando mais de uma serve, ou n
 
 ## Mapa
 
+### Projeto novo (plugin `fabrica`)
+
+| Situação | Use |
+|---|---|
+| Ideia nova: site, sistema, robô, ferramenta, "quero criar", "tenho uma ideia" (que não seja vídeo dos canais) | skill `fabrica:novo-projeto` (entrevista, ficha, modelo pronto, fiscal, folha de telas, manual) |
+| Pôr o padrão (painel, ficha, fiscal, travas) num projeto que já existe | skill `fabrica:novo-projeto`, seção "Adotar" |
+| Mudança num projeto criado pela fábrica (tem `fabrica.json`) | skill `mudanca` do próprio projeto e o `docs/manual.md` dele |
+
+Projeto da fábrica já traz processo próprio (teste antes, fiscal, revisão pela folha de telas): ECC e revisores
+entram como reforço, não em substituição.
+
 ### Código
 
 | Situação | Use |

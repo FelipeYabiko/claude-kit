@@ -11,5 +11,5 @@ if errorlevel 1 (
 	exit /b 1
 )
 echo  Abrindo o site no navegador... Para fechar, feche esta janela.
-node ferramentas\servir.mjs --pasta site --abrir
+node ferramentas\servir.mjs --abrir
 pause

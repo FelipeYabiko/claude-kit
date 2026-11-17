@@ -83,7 +83,15 @@ const ehPrincipal = process.argv[1] && path.resolve(process.argv[1]) === fileURL
 if (ehPrincipal) {
 	const args = process.argv.slice(2);
 	const opcao = (nome, padrao) => (args.includes(`--${nome}`) ? args[args.indexOf(`--${nome}`) + 1] : padrao);
-	const pasta = opcao('pasta', path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
+	const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+	// sem --pasta: a pasta do site que o fabrica.json disser (pastaDoSite); senão site/ se existir; senão a raiz
+	let doProjeto = fs.existsSync(path.join(raiz, 'site')) ? 'site' : '.';
+	try {
+		doProjeto = JSON.parse(fs.readFileSync(path.join(raiz, 'fabrica.json'), 'utf8')).pastaDoSite ?? doProjeto;
+	} catch {
+		// sem fabrica.json: vale o palpite acima
+	}
+	const pasta = path.resolve(raiz, opcao('pasta', doProjeto));
 	try {
 		const {endereco} = await servir({pasta, porta: Number(opcao('porta', 4173))});
 		console.log(`Site aberto em ${endereco}  (Ctrl+C para fechar)`);
