@@ -183,6 +183,7 @@ test('imagens: sem alt é erro, sem tamanho é aviso, pesada é aviso ou erro', 
 	const r = await site({'site/index.html': pagina('<h1>A</h1><img src="a.png"><img src="a.png" alt="" width="10" height="10">'), 'site/a.png': 'x', 'site/media.jpg': Buffer.alloc(600 * 1024), 'site/enorme.jpg': Buffer.alloc(2100 * 1024)});
 	assert.equal(r.de('imagens', 'erro').filter((m) => /sem `alt`/.test(m)).length, 1, 'alt vazio vale (imagem de enfeite)');
 	assert.ok(r.aviso('imagens', /sem `width` e `height`/));
+	assert.equal((await site({'site/index.html': pagina('<h1>A</h1><div class="preview"><img alt=""></div>')})).de('imagens').length, 0, 'moldura vazia que o site preenche depois não precisa de tamanho');
 	assert.ok(r.aviso('imagens', /media\.jpg: imagem de 600 KB/));
 	assert.ok(r.erro('imagens', /enorme\.jpg: imagem de 2\.1 MB/));
 });

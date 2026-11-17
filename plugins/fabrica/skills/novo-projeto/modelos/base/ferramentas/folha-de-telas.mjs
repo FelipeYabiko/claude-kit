@@ -71,7 +71,8 @@ const olhar = (toque) => {
 	const sobra = document.documentElement.scrollWidth - window.innerWidth;
 	if (sobra > 1) achados.push({nivel: 'erro', mensagem: `a página vaza ${sobra}px para o lado (aparece barra de rolagem horizontal)`});
 	for (const img of document.images) {
-		if (img.complete && img.naturalWidth === 0) achados.push({nivel: 'erro', mensagem: `imagem não carregou: ${img.getAttribute('src')}`});
+		// imagem sem endereço é moldura que o próprio site preenche depois (prévia ao passar o mouse): não é defeito
+		if (img.getAttribute('src') && img.complete && img.naturalWidth === 0) achados.push({nivel: 'erro', mensagem: `imagem não carregou: ${img.getAttribute('src')}`});
 	}
 	if (toque) {
 		const pequenos = [...document.querySelectorAll('a, button, input, select, textarea, summary')].filter((el) => {

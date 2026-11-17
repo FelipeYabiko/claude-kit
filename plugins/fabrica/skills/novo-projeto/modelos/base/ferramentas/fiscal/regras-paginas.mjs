@@ -95,7 +95,7 @@ export const regrasPaginas = [
 			for (const arquivo of paginasDe(p)) {
 				for (const t of lerTags(p.ler(arquivo) ?? '').filter((t) => t.nome === 'img')) {
 					if (!('alt' in t.atributos)) achados.push(erro('imagem sem `alt`: descreva a imagem em uma frase (ou `alt=""` se for só enfeite)', {arquivo, linha: t.linha}));
-					if (!t.atributos.width || !t.atributos.height) achados.push(aviso('imagem sem `width` e `height`: a página pula enquanto carrega', {arquivo, linha: t.linha}));
+					if (t.atributos.src && (!t.atributos.width || !t.atributos.height)) achados.push(aviso('imagem sem `width` e `height`: a página pula enquanto carrega', {arquivo, linha: t.linha}));
 				}
 			}
 			for (const arquivo of p.com(IMAGEM)) {
