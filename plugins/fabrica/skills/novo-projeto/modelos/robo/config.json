@@ -1,0 +1,8 @@
+{
+	"exemplo": true,
+	"fontes": [
+		{"nome": "Canal de exemplo", "endereco": "exemplos/feed-de-exemplo.xml"}
+	],
+	"maximoPorFonte": 15,
+	"naPrimeiraVez": 3
+}

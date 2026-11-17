@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Feed de exemplo, no mesmo formato que o YouTube publica para cada canal
+     (https://www.youtube.com/feeds/videos.xml?channel_id=...). Serve para o robô rodar sem internet. -->
+<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015" xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
+	<title>Canal de exemplo</title>
+	<author><name>Canal de exemplo</name></author>
+	<entry>
+		<id>yt:video:exemplo0004</id>
+		<yt:videoId>exemplo0004</yt:videoId>
+		<title>Por que a areia movediça não te engole</title>
+		<link rel="alternate" href="https://www.youtube.com/watch?v=exemplo0004"/>
+		<author><name>Canal de exemplo</name></author>
+		<published>2026-11-14T15:00:11+00:00</published>
+		<updated>2026-11-14T18:20:00+00:00</updated>
+	</entry>
+	<entry>
+		<id>yt:video:exemplo0003</id>
+		<yt:videoId>exemplo0003</yt:videoId>
+		<title>A curva impossível &amp; a física do chute</title>
+		<link rel="alternate" href="https://www.youtube.com/watch?v=exemplo0003"/>
+		<author><name>Canal de exemplo</name></author>
+		<published>2026-11-09T15:00:03+00:00</published>
+		<updated>2026-11-10T09:00:00+00:00</updated>
+	</entry>
+	<entry>
+		<id>yt:video:exemplo0002</id>
+		<yt:videoId>exemplo0002</yt:videoId>
+		<title><![CDATA[O que acontece se uma formiga cair da mesa?]]></title>
+		<link rel="alternate" href="https://www.youtube.com/watch?v=exemplo0002"/>
+		<author><name>Canal de exemplo</name></author>
+		<published>2026-11-02T15:00:07+00:00</published>
+		<updated>2026-11-02T15:30:00+00:00</updated>
+	</entry>
+	<entry>
+		<id>yt:video:exemplo0001</id>
+		<yt:videoId>exemplo0001</yt:videoId>
+		<title>Uma moeda do alto do prédio mata?</title>
+		<link rel="alternate" href="https://www.youtube.com/watch?v=exemplo0001"/>
+		<author><name>Canal de exemplo</name></author>
+		<published>2026-10-26T15:00:00+00:00</published>
+		<updated>2026-10-26T15:10:00+00:00</updated>
+	</entry>
+</feed>

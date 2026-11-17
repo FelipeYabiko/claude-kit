@@ -1,0 +1,6 @@
+{
+	"nome": "robo",
+	"descricao": "Robô: uma tarefa que roda sozinha em passos (buscar, separar, entregar), no computador com dois cliques ou todo dia no GitHub, com modo ensaio, memória entre rodadas e registro. O exemplo vigia canais do YouTube e sites e avisa o que saiu de novo.",
+	"atualizaveis": ["ferramentas", ".claude/hooks", "lib/executar.mjs", "lib/rede.mjs", "tests/motor.test.mjs"],
+	"protegidos": ["ferramentas/fiscal/regras-do-projeto.mjs"]
+}

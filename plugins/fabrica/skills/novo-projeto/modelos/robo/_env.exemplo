@@ -1,0 +1,4 @@
+# Segredos do robô (chaves e senhas). Copie este arquivo para ".env" e preencha.
+# O ".env" nunca vai para o GitHub. No GitHub Actions, cadastre os mesmos nomes em
+# Settings → Secrets and variables → Actions.
+# Este robô de exemplo não precisa de nenhum segredo. Quando um passo usar ctx.segredo('NOME'), liste o NOME aqui:

@@ -1,0 +1,41 @@
+# Roda o robô sozinho no GitHub, de graça, sem depender do computador do dono ligado.
+# Como vem: só roda quando alguém aperta "Run workflow" (aba Actions). Para rodar todo dia, tire o "#" das duas
+# linhas de "schedule" abaixo e ajuste o horário. ATENÇÃO: o relógio do GitHub é o de Londres (UTC), 3 horas à
+# frente de Brasília: "17 11 * * *" = todo dia às 08:17 de Brasília. Minuto quebrado (17, não 00) atrasa menos.
+# O resultado (saida/ e estado/) é guardado de volta no repositório a cada rodada.
+name: Rodar o robô
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '17 11 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: robo
+  cancel-in-progress: false
+
+jobs:
+  rodar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Rodar
+        run: node robo.mjs
+        # Segredos que os passos pedem com ctx.segredo('NOME') entram aqui, um por linha:
+        # env:
+        #   NOME: ${{ secrets.NOME }}
+      - name: Guardar o resultado no repositório
+        if: always()
+        run: |
+          git config user.name "robo"
+          git config user.email "robo@users.noreply.github.com"
+          git add saida estado
+          git diff --cached --quiet || git commit -m "Robô: resultado de $(date -u +%F)"
+          git push

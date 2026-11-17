@@ -1,0 +1,6 @@
+{
+	"scripts": {
+		"start": "node robo.mjs",
+		"ensaio": "node robo.mjs --ensaio"
+	}
+}

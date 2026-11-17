@@ -1,0 +1,9 @@
+{
+	"name": "fabrica",
+	"private": true,
+	"type": "module",
+	"description": "Testes do plugin fabrica (o gerador, o fiscal e as travas). Rode com: npm test",
+	"scripts": {
+		"test": "node --test \"tests/*.test.mjs\""
+	}
+}
